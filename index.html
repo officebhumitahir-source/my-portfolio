@@ -262,6 +262,57 @@
 </head>
 
 <body class="min-h-screen relative w-full m-0 p-0 text-[#18181B]">
+    <script>
+        if (sessionStorage.getItem('portfolio_entered') === 'true') {
+            document.write('<style>#entry-screen { display: none !important; }</style>');
+        }
+    </script>
+
+    <!-- Click to Open Portfolio Entry Gate -->
+    <div id="entry-screen" class="fixed inset-0 z-[99999] bg-[#FAF8F5] flex flex-col items-center justify-center p-4 select-none transition-all duration-500">
+        <!-- Ambient Spheres Behind Entry Screen -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="floating-sphere w-96 h-96 -top-20 -left-20 bg-gradient-to-br from-[#A7F3D0] to-[#34D399] opacity-60"></div>
+            <div class="floating-sphere w-96 h-96 -bottom-20 -right-20 bg-gradient-to-br from-[#DDD6FE] to-[#C084FC] opacity-60"></div>
+            <div class="floating-sphere w-80 h-80 top-1/2 left-1/4 -translate-y-1/2 bg-gradient-to-br from-[#FED7AA] to-[#F43F5E] opacity-50"></div>
+        </div>
+
+        <!-- 3D Entry Card -->
+        <div class="tilt-card relative z-10 bg-white border-3 border-[#18181B] pop-shadow-lg rounded-3xl p-8 sm:p-12 max-w-md w-full text-center flex flex-col items-center gap-6 cursor-pointer transform hover:scale-[1.02] transition-transform duration-300 group">
+            <!-- Floating Status Badge -->
+            <div class="inline-flex items-center gap-2 bg-[#BBF7D0] text-[#14532D] px-3.5 py-1 rounded-full border-2 border-[#18181B] pop-shadow-sm font-mono text-xs font-bold uppercase">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-ping"></span>
+                <span>SYSTEM: ONLINE &bull; READY</span>
+            </div>
+
+            <!-- 3D Animated Folder / Vault Icon -->
+            <div class="w-24 h-24 rounded-2xl bg-[#FEF08A] border-3 border-[#18181B] pop-shadow flex items-center justify-center transform group-hover:-translate-y-1 group-hover:rotate-3 transition-transform duration-300">
+                <span class="text-5xl select-none">📂</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div>
+                <h1 class="font-display font-black text-3xl sm:text-4xl text-[#18181B] tracking-tight mb-2">
+                    Bhumit Ahir
+                </h1>
+                <p class="font-mono text-xs text-[#52525B] font-bold uppercase tracking-wider">
+                    Full-Stack Developer &bull; Mobile App Data Analyst
+                </p>
+            </div>
+
+            <!-- 3D Pulse Action Button -->
+            <div class="w-full">
+                <div class="btn-3d w-full py-3.5 bg-[#A7F3D0] group-hover:bg-[#6EE7B7] text-[#064E3B] font-display font-black text-sm uppercase tracking-wider rounded-2xl flex items-center justify-center gap-2">
+                    <span>⚡</span>
+                    <span>CLICK TO OPEN PORTFOLIO</span>
+                    <span>→</span>
+                </div>
+                <div class="mt-3 font-mono text-[11px] text-[#71717A] tracking-wider uppercase">
+                    Tap anywhere to unlock interface
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Ambient Floating 3D Spheres Layer -->
     <div class="sphere-layer" id="ambient-sphere-layer">
@@ -1015,6 +1066,29 @@
                     console.log("Type whoami, exp, or open 1-6 to navigate.");
             }
         }
+        // --- ENTRY SCREEN LOGIC ---
+        const entryScreen = document.getElementById('entry-screen');
+        function openPortfolio() {
+            playSound('click');
+            sessionStorage.setItem('portfolio_entered', 'true');
+            if (entryScreen) {
+                entryScreen.style.opacity = '0';
+                entryScreen.style.transform = 'scale(1.05)';
+                entryScreen.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    entryScreen.style.display = 'none';
+                }, 400);
+            }
+        }
+
+        if (entryScreen) {
+            if (sessionStorage.getItem('portfolio_entered') === 'true') {
+                entryScreen.style.display = 'none';
+            } else {
+                entryScreen.addEventListener('click', openPortfolio);
+            }
+        }
+
         window.runCommand = processCommand;
     </script>
 </body>
