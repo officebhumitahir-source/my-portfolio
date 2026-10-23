@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-auto cursor-default">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Platform | Bhumit Ahir</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'kindle-bg': '#F5F5F5', 'kindle-ink': '#1A1A1A' }, fontFamily: { serif: ['"Source Serif Pro"', '"Playfair Display"', 'serif'], mono: ['"JetBrains Mono"', 'monospace'] } } } }
+    </script>
+    <style>
+        body {
+            background-color: #F5F5F5;
+            color: #1A1A1A;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .dither-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="1" height="1" fill="%231A1A1A" opacity="0.05"/><rect x="2" y="2" width="1" height="1" fill="%231A1A1A" opacity="0.05"/></svg>');
+        }
+
+        /* Terminal Cursor Blink */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Hacker Text Selection */
+        ::selection {
+            background: #22C55E;
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-serif relative w-full bg-[#F5F5F5] text-[#1A1A1A] m-0 p-0 overflow-x-hidden">
+
+    <nav class="border-b-2 border-[#1A1A1A] px-6 sm:px-12 lg:px-16 py-4 flex justify-between items-center bg-[#F5F5F5] sticky top-0 z-50">
+        <a href="index.html" class="font-mono font-bold text-sm hover:underline">
+            &lt; RETURN</a>
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600">[IN DEVELOPING STAGE]</span>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest hidden sm:inline">Project 03 // NEXHR Platform</span>
+        </div>
+    </nav>
+
+    <main>
+        <header class="w-full px-6 sm:px-12 lg:px-16 py-10 sm:py-14 border-b-2 border-[#1A1A1A] text-center">
+            <h1 class="text-3xl sm:text-5xl font-black font-serif mb-2">NEXHR: AI Workforce Intelligence Platform<span
+                    class="text-green-600 animate-pulse">_</span></h1>
+            <div class="font-mono text-xs uppercase tracking-widest opacity-60">Full-Stack Monorepo • React 18 • Node.js • Prisma ORM • AI Copilot</div>
+        </header>
+
+        <div class="w-full border-b-2 border-[#1A1A1A] bg-[#E5E5E5] relative overflow-hidden group flex justify-center py-8 sm:py-12 px-4">
+            <img src="mockup_hrms.svg" alt="NEXHR AI-Powered HRMS Platform Mockup" class="max-w-4xl w-full h-auto object-contain shadow-lg border-2 border-[#1A1A1A]">
+        </div>
+
+        <div class="w-full grid grid-cols-1 lg:grid-cols-3 border-b-2 border-[#1A1A1A]">
+            <div class="lg:col-span-2 p-6 sm:p-10 lg:p-14 border-b-2 lg:border-b-0 lg:border-r-2 border-[#1A1A1A] space-y-6">
+                <section>
+                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Overview</h2>
+                    <p class="leading-relaxed">
+                        <strong>NEXHR</strong> is an enterprise-ready, AI-powered Workforce Intelligence and Human Resource Management monorepo platform designed for small-to-medium businesses. Built to replace fragmented HR spreadsheets, it unifies live attendance tracking with GPS geofencing, role-based employee lifecycle directories, automated payroll calculation, and an intelligent AI Copilot that detects workforce attrition risks and payroll discrepancies in real time.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Key Modules & Monorepo Architecture</h2>
+                    <ul class="list-disc list-inside space-y-2 font-mono text-sm leading-relaxed">
+                        <li><strong>NEXHR AI Copilot:</strong> Natural language analytics assistant analyzing workforce retention scores, leave spikes, and shift efficiency models.</li>
+                        <li><strong>Attendance & GPS Geofence Engine:</strong> System-verified punch-in / punch-out recording with real-time shift duration countdown and coordinate validation.</li>
+                        <li><strong>Multi-Tenant Role-Based Access Control:</strong> Strict hierarchical permission matrix separating `SUPER_ADMIN`, `COMPANY_ADMIN`, and `EMPLOYEE` portals.</li>
+                        <li><strong>Automated Payroll & Invoicing:</strong> Dynamic salary ledger accounting for tax deductions, overtime rates, and Razorpay subscription billing.</li>
+                        <li><strong>Immutable Audit Trails:</strong> Cryptographically logged administrative events for compliance, security reviews, and employee record integrity.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Current Status Note</h2>
+                    <p class="text-sm font-mono bg-[#EAEAEA] p-4 border-l-4 border-green-600 leading-relaxed">
+                        <strong>DEVELOPMENT PHASE:</strong> Core backend APIs, Prisma PostgreSQL schema, and authentication layers are operational. The React frontend dashboard and AI telemetry integration are undergoing final integration testing.
+                    </p>
+                </section>
+            </div>
+
+            <div class="p-8 bg-[#1A1A1A] text-[#F5F5F5] flex flex-col justify-between min-h-[300px]">
+                <div>
+                    <h2 class="font-mono font-bold text-lg mb-4 border-b border-[#F5F5F5] pb-2 text-center md:text-left">
+                        TECH STACK</h2>
+                    <div class="space-y-2 font-mono text-sm">
+                        <div class="flex justify-between scram-container"><span>Frontend</span> <span class="text-green-400 font-bold">React 18 / Vite</span></div>
+                        <div class="flex justify-between scram-container"><span>Monorepo</span> <span>npm workspaces</span></div>
+                        <div class="flex justify-between scram-container"><span>Backend</span> <span class="text-yellow-400 font-bold">Node.js / Express</span></div>
+                        <div class="flex justify-between scram-container"><span>Database</span> <span>PostgreSQL / Prisma</span></div>
+                        <div class="flex justify-between scram-container"><span>AI Engine</span> <span class="text-blue-400">Python ML Services</span></div>
+                        <div class="flex justify-between scram-container"><span>Security</span> <span>JWT + RBAC + GPS</span></div>
+                        <div class="flex justify-between scram-container"><span>Billing</span> <span>Razorpay API</span></div>
+                    </div>
+                </div>
+                <div class="mt-8 border-t border-[#333] pt-4 font-mono text-xs opacity-75">
+                    <div>ENGINEER: Bhumit Ahir</div>
+                    <div class="text-green-400 font-bold">STATE: IN DEVELOPING STAGE</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full p-8 sm:p-12 text-center bg-[#F5F5F5]">
+        <p class="font-serif italic text-lg mb-4">"Structure powers scale. Simplicity maintains it."</p>
+        <a href="index.html"
+            class="inline-block px-8 py-3 bg-[#1A1A1A] text-[#F5F5F5] font-bold font-mono text-sm hover:invert transition-none">BACK
+            TO PORTFOLIO</a>
+    </footer>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(100, now + 0.08);
+                gainNode.gain.setValueAtTime(0.1, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            }
+        }
+
+        // Global Click Audio
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', () => {
+                playSound('click');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

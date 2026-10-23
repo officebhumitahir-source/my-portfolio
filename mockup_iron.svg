@@ -1,0 +1,27 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F5F5F5"/>
+  <!-- Phone Frame -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  
+  <!-- Screen Content: Blurred BG Representation -->
+  <rect x="270" y="70" width="260" height="460" fill="#E0E0E0"/>
+  
+  <!-- Lock Overlay -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="#1A1A1A" opacity="0.8"/>
+  
+  <text x="400" y="250" font-family="monospace" font-size="24" fill="#F5F5F5" text-anchor="middle" font-weight="bold">LOCKED</text>
+  <text x="400" y="280" font-family="monospace" font-size="14" fill="#F5F5F5" text-anchor="middle">Focus Mode Active</text>
+  
+  <!-- Unlock Button -->
+  <rect x="300" y="400" width="200" height="40" rx="5" fill="none" stroke="#F5F5F5" stroke-width="2"/>
+  <text x="400" y="425" font-family="monospace" font-size="14" fill="#F5F5F5" text-anchor="middle">EMERGENCY UNLOCK</text>
+
+  <!-- Dither Effect Overlay -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="url(#dither)" opacity="0.1"/>
+  <defs>
+    <pattern id="dither" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="2" y="2" width="1" height="1" fill="#1A1A1A"/>
+    </pattern>
+  </defs>
+</svg>

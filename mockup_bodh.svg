@@ -1,0 +1,134 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kindle Paper Background -->
+  <rect width="800" height="600" fill="#F5F5F5"/>
+
+  <!-- Android Phone Device Frame (Minimalist / Kindle Style) -->
+  <g transform="translate(230, 25)">
+    <!-- Device Outer Border -->
+    <rect x="0" y="0" width="340" height="550" rx="28" ry="28" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="4"/>
+    
+    <!-- Phone Ear Grill / Camera Hole -->
+    <rect x="125" y="14" width="90" height="6" rx="3" fill="#1A1A1A"/>
+    <circle cx="170" cy="30" r="4" fill="#1A1A1A"/>
+
+    <!-- Screen Bezel Area -->
+    <rect x="14" y="44" width="312" height="480" rx="14" ry="14" fill="#FAFAFA" stroke="#1A1A1A" stroke-width="2"/>
+
+    <!-- App Top Bar -->
+    <rect x="14" y="44" width="312" height="52" fill="#1A1A1A"/>
+    
+    <!-- Buddha Icon Silhouette -->
+    <g transform="translate(28, 54) scale(0.65)">
+      <!-- Head and Ushnisha -->
+      <circle cx="18" cy="8" r="3" fill="#22C55E"/>
+      <circle cx="18" cy="14" r="7" fill="#F5F5F5"/>
+      <!-- Body & Folded Hands -->
+      <path d="M7 36 C7 23 29 23 29 36 Z" fill="none" stroke="#F5F5F5" stroke-width="2.5"/>
+      <ellipse cx="18" cy="38" rx="14" ry="4" fill="#F5F5F5"/>
+    </g>
+
+    <text x="60" y="75" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F5F5F5" font-weight="bold">BODH // बोध</text>
+    <rect x="230" y="60" width="82" height="20" fill="#22C55E"/>
+    <text x="271" y="74" font-family="'JetBrains Mono', monospace" font-size="9" fill="#000000" text-anchor="middle" font-weight="bold">100% OFFLINE</text>
+
+    <!-- Screen Time Metrics Dial Area -->
+    <g transform="translate(28, 108)">
+      <!-- Main Metric Box -->
+      <rect x="0" y="0" width="284" height="96" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="14" y="22" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1A1A1A" opacity="0.6">TODAY'S SCREEN DURATION</text>
+      <text x="14" y="58" font-family="'JetBrains Mono', monospace" font-size="30" fill="#1A1A1A" font-weight="bold">1<tspan font-size="18">h</tspan> 42<tspan font-size="18">m</tspan></text>
+      <text x="14" y="80" font-family="'JetBrains Mono', monospace" font-size="10" fill="#22C55E" font-weight="bold">▼ -38% vs Yesterday (Goal: &lt; 3h)</text>
+      <circle cx="240" cy="48" r="26" fill="none" stroke="#E5E5E5" stroke-width="6"/>
+      <circle cx="240" cy="48" r="26" fill="none" stroke="#22C55E" stroke-width="6" stroke-dasharray="163" stroke-dashoffset="65" transform="rotate(-90 240 48)"/>
+      <text x="240" y="52" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="bold">60%</text>
+    </g>
+
+    <!-- 24-Hour Telemetry Bar Chart -->
+    <g transform="translate(28, 216)">
+      <rect x="0" y="0" width="284" height="90" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1A1A1A" opacity="0.6">HOURLY USAGE TELEMETRY (24H)</text>
+      
+      <!-- Bars representing hourly spikes -->
+      <rect x="16" y="55" width="8" height="20" fill="#1A1A1A"/>
+      <rect x="28" y="65" width="8" height="10" fill="#1A1A1A"/>
+      <rect x="40" y="70" width="8" height="5" fill="#1A1A1A"/>
+      <rect x="52" y="72" width="8" height="3" fill="#1A1A1A"/>
+      <rect x="64" y="60" width="8" height="15" fill="#1A1A1A"/>
+      <rect x="76" y="45" width="8" height="30" fill="#1A1A1A"/>
+      <rect x="88" y="35" width="8" height="40" fill="#22C55E"/>
+      <rect x="100" y="48" width="8" height="27" fill="#1A1A1A"/>
+      <rect x="112" y="40" width="8" height="35" fill="#1A1A1A"/>
+      <rect x="124" y="58" width="8" height="17" fill="#1A1A1A"/>
+      <rect x="136" y="68" width="8" height="7" fill="#1A1A1A"/>
+      <rect x="148" y="30" width="8" height="45" fill="#22C55E"/>
+      <rect x="160" y="50" width="8" height="25" fill="#1A1A1A"/>
+      <rect x="172" y="62" width="8" height="13" fill="#1A1A1A"/>
+      <rect x="184" y="42" width="8" height="33" fill="#1A1A1A"/>
+      <rect x="196" y="55" width="8" height="20" fill="#1A1A1A"/>
+      <rect x="208" y="67" width="8" height="8" fill="#1A1A1A"/>
+      <rect x="220" y="60" width="8" height="15" fill="#1A1A1A"/>
+      <rect x="232" y="45" width="8" height="30" fill="#1A1A1A"/>
+      <rect x="244" y="38" width="8" height="37" fill="#22C55E"/>
+      <rect x="256" y="58" width="8" height="17" fill="#1A1A1A"/>
+
+      <line x1="12" y1="76" x2="272" y2="76" stroke="#1A1A1A" stroke-width="1"/>
+      <text x="16" y="85" font-family="'JetBrains Mono', monospace" font-size="7" fill="#888">00:00</text>
+      <text x="140" y="85" font-family="'JetBrains Mono', monospace" font-size="7" fill="#888">12:00</text>
+      <text x="260" y="85" font-family="'JetBrains Mono', monospace" font-size="7" fill="#888" text-anchor="end">23:59</text>
+    </g>
+
+    <!-- Mindful Friction Gates / App Limits -->
+    <g transform="translate(28, 318)">
+      <!-- Gate 1: Instagram -->
+      <rect x="0" y="0" width="284" height="48" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+      <rect x="10" y="11" width="26" height="26" fill="#1A1A1A"/>
+      <text x="23" y="28" font-family="'JetBrains Mono', monospace" font-size="12" fill="#22C55E" text-anchor="middle" font-weight="bold">IG</text>
+      <text x="44" y="25" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1A1A1A" font-weight="bold">Instagram Limit</text>
+      <text x="44" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1A1A1A" opacity="0.6">15m / 20m Used Today</text>
+      <rect x="215" y="13" width="60" height="22" fill="#22C55E"/>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="9" fill="#000" text-anchor="middle" font-weight="bold">LOCKED</text>
+
+      <!-- Gate 2: YouTube Shorts -->
+      <rect x="0" y="56" width="284" height="48" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+      <rect x="10" y="67" width="26" height="26" fill="#1A1A1A"/>
+      <text x="23" y="84" font-family="'JetBrains Mono', monospace" font-size="12" fill="#22C55E" text-anchor="middle" font-weight="bold">YT</text>
+      <text x="44" y="81" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1A1A1A" font-weight="bold">Shorts Mindful Friction</text>
+      <text x="44" y="94" font-family="'JetBrains Mono', monospace" font-size="9" fill="#22C55E">10s Breath Pause Active</text>
+      <rect x="215" y="69" width="60" height="22" fill="#1A1A1A"/>
+      <text x="245" y="84" font-family="'JetBrains Mono', monospace" font-size="9" fill="#22C55E" text-anchor="middle" font-weight="bold">ACTIVE</text>
+    </g>
+
+    <!-- Bottom Zero-Internet Privacy Banner -->
+    <g transform="translate(28, 432)">
+      <rect x="0" y="0" width="284" height="44" fill="#1A1A1A"/>
+      <text x="142" y="21" font-family="'JetBrains Mono', monospace" font-size="10" fill="#22C55E" text-anchor="middle" font-weight="bold">🔒 ZERO INTERNET PERMISSION</text>
+      <text x="142" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5F5F5" opacity="0.8" text-anchor="middle">Room SQLite • 0% Remote Sockets • 100% Private</text>
+    </g>
+  </g>
+
+  <!-- Left Editorial Annotation Card -->
+  <g transform="translate(35, 150)">
+    <rect x="0" y="0" width="175" height="140" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+    <text x="14" y="26" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1A1A1A" font-weight="bold">[LOCAL_FIRST]</text>
+    
+    <text x="14" y="52" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1A1A1A">
+      <tspan x="14" dy="0">Zero network sockets.</tspan>
+      <tspan x="14" dy="18">Telemetry on device.</tspan>
+      <tspan x="14" dy="18">100% offline privacy.</tspan>
+    </text>
+    
+    <line x1="14" y1="102" x2="161" y2="102" stroke="#1A1A1A" stroke-width="1" opacity="0.25"/>
+    <text x="14" y="122" font-family="'JetBrains Mono', monospace" font-size="9" fill="#22C55E" font-weight="bold">● NO ADS / NO CLOUD</text>
+  </g>
+
+  <!-- Right Editorial Annotation Card -->
+  <g transform="translate(590, 150)">
+    <rect x="0" y="0" width="175" height="140" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2"/>
+    <text x="14" y="26" font-family="'JetBrains Mono', monospace" font-size="10" fill="#22C55E" font-weight="bold">[AWARENESS_STREAK]</text>
+    <text x="14" y="54" font-family="'JetBrains Mono', monospace" font-size="20" fill="#FFFFFF" font-weight="bold">14 DAYS</text>
+    <text x="14" y="74" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5F5F5" opacity="0.8">LEVEL: FOCUS GUARDIAN</text>
+    <text x="14" y="88" font-family="'JetBrains Mono', monospace" font-size="8" fill="#22C55E">XP: 2,450 / 3,000</text>
+    <line x1="14" y1="102" x2="161" y2="102" stroke="#404040" stroke-width="1"/>
+    <text x="14" y="122" font-family="'JetBrains Mono', monospace" font-size="9" fill="#22C55E" font-weight="bold">● KOTLIN • COMPOSE</text>
+  </g>
+</svg>

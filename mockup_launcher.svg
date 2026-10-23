@@ -1,0 +1,28 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F5F5F5"/>
+  <!-- Phone Frame -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  <!-- Screen Content -->
+  <text x="400" y="150" font-family="monospace" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="bold">12:30</text>
+  
+  <text x="280" y="220" font-family="monospace" font-size="20" fill="#1A1A1A">Phone</text>
+  <line x1="280" y1="230" x2="520" y2="230" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="4 4"/>
+  
+  <text x="280" y="270" font-family="monospace" font-size="20" fill="#1A1A1A">Messages</text>
+  <line x1="280" y1="280" x2="520" y2="280" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="4 4"/>
+  
+  <text x="280" y="320" font-family="monospace" font-size="20" fill="#1A1A1A">Maps</text>
+  <line x1="280" y1="330" x2="520" y2="330" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="4 4"/>
+  
+  <text x="280" y="370" font-family="monospace" font-size="20" fill="#1A1A1A">Camera</text>
+  <line x1="280" y1="380" x2="520" y2="380" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Dither Effect Overlay -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="url(#dither)" opacity="0.1"/>
+  <defs>
+    <pattern id="dither" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="2" y="2" width="1" height="1" fill="#1A1A1A"/>
+    </pattern>
+  </defs>
+</svg>

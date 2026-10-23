@@ -1,0 +1,27 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F5F5F5"/>
+  <!-- Phone Frame -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  <!-- Screen Content -->
+  <text x="400" y="100" font-family="monospace" font-size="18" fill="#1A1A1A" text-anchor="middle" font-weight="bold">LEGACY SPACE</text>
+  
+  <!-- Masonry Grid Representation -->
+  <rect x="270" y="130" width="120" height="100" fill="#E0E0E0" stroke="#1A1A1A" stroke-width="1"/>
+  <rect x="410" y="130" width="120" height="150" fill="#E0E0E0" stroke="#1A1A1A" stroke-width="1"/>
+  
+  <rect x="270" y="250" width="120" height="150" fill="#E0E0E0" stroke="#1A1A1A" stroke-width="1"/>
+  <rect x="410" y="300" width="120" height="100" fill="#E0E0E0" stroke="#1A1A1A" stroke-width="1"/>
+
+  <!-- Search Bar -->
+  <rect x="290" y="480" width="220" height="30" rx="15" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="310" y="500" font-family="monospace" font-size="14" fill="#1A1A1A">Search Memories...</text>
+
+  <!-- Dither Effect Overlay -->
+  <rect x="250" y="50" width="300" height="500" rx="20" ry="20" fill="url(#dither)" opacity="0.1"/>
+  <defs>
+    <pattern id="dither" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="2" y="2" width="1" height="1" fill="#1A1A1A"/>
+    </pattern>
+  </defs>
+</svg>

@@ -1,0 +1,45 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F5F5F5"/>
+  <!-- Monitor Frame -->
+  <rect x="100" y="50" width="600" height="400" rx="10" ry="10" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  <rect x="350" y="450" width="100" height="50" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  <line x1="300" y1="500" x2="500" y2="500" stroke="#1A1A1A" stroke-width="4"/>
+
+  <!-- Screen Content: Admin Dashboard -->
+  <rect x="120" y="70" width="100" height="360" fill="#E0E0E0" stroke="#1A1A1A" stroke-width="1"/>
+  
+  <!-- Header -->
+  <rect x="240" y="70" width="440" height="40" fill="#1A1A1A"/>
+  <text x="460" y="95" font-family="monospace" font-size="14" fill="#F5F5F5" text-anchor="middle">BARBER ADMIN DASHBOARD</text>
+
+  <!-- Availability Toggle -->
+  <rect x="580" y="80" width="80" height="20" rx="10" fill="#22C55E"/>
+  <circle cx="650" cy="90" r="8" fill="#F5F5F5"/>
+
+  <!-- Cards -->
+  <rect x="240" y="130" width="130" height="80" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="305" y="160" font-family="monospace" font-size="10" fill="#1A1A1A" text-anchor="middle">Todays Bookings</text>
+  <text x="305" y="190" font-family="monospace" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="bold">12</text>
+
+  <rect x="395" y="130" width="130" height="80" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="460" y="160" font-family="monospace" font-size="10" fill="#1A1A1A" text-anchor="middle">Revenue</text>
+  <text x="460" y="190" font-family="monospace" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="bold">$450</text>
+
+  <rect x="550" y="130" width="130" height="80" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="615" y="160" font-family="monospace" font-size="10" fill="#1A1A1A" text-anchor="middle">Status</text>
+  <text x="615" y="190" font-family="monospace" font-size="16" fill="#22C55E" text-anchor="middle" font-weight="bold">ACTIVE</text>
+
+  <!-- List -->
+  <rect x="240" y="230" width="440" height="30" fill="#E0E0E0"/>
+  <rect x="240" y="270" width="440" height="30" fill="none" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="2 2"/>
+  <rect x="240" y="310" width="440" height="30" fill="none" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="2 2"/>
+
+  <!-- Dither Effect Overlay -->
+  <rect x="100" y="50" width="600" height="400" rx="10" ry="10" fill="url(#dither)" opacity="0.1"/>
+  <defs>
+    <pattern id="dither" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="#1A1A1A"/>
+      <rect x="2" y="2" width="1" height="1" fill="#1A1A1A"/>
+    </pattern>
+  </defs>
+</svg>

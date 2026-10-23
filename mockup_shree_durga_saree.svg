@@ -1,0 +1,58 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kindle-bg -->
+  <rect width="800" height="600" fill="#F5F5F5"/>
+  <!-- Browser Frame -->
+  <rect x="50" y="50" width="700" height="500" rx="4" ry="4" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+  <!-- Header / Navigation Bar -->
+  <rect x="50" y="50" width="700" height="60" fill="#1A1A1A"/>
+  <text x="70" y="90" font-family="serif" font-size="22" fill="#F5F5F5" font-weight="bold">SHREE DURGA TEXTILES</text>
+  <text x="710" y="86" font-family="monospace" font-size="12" fill="#F5F5F5" text-anchor="end" opacity="0.8">WHOLESALE CATALOG • ADMIN PORTAL</text>
+  
+  <!-- Hero Section Frame -->
+  <rect x="70" y="130" width="660" height="180" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <!-- Saree Graphic Outline (Abstract Minimalist Art) -->
+  <path d="M 90 280 L 150 150 L 210 280 Z" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <path d="M 150 150 L 250 250 L 350 150" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <line x1="90" y1="280" x2="350" y2="280" stroke="#1A1A1A" stroke-width="2"/>
+  <!-- Zari details inside the triangle -->
+  <path d="M 120 215 L 180 215 M 105 250 L 195 250" stroke="#1A1A1A" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Hero Text -->
+  <text x="380" y="190" font-family="serif" font-size="28" fill="#1A1A1A" font-weight="bold">WEAVING HERITAGE</text>
+  <text x="380" y="225" font-family="serif" font-size="22" fill="#1A1A1A" font-style="italic">Defining Luxury Sarees</text>
+  <text x="380" y="260" font-family="monospace" font-size="12" fill="#1A1A1A" opacity="0.7">Manufacturers of Pure Katan Silks & Organzas</text>
+
+  <!-- Collection Section Divider -->
+  <line x1="70" y1="335" x2="730" y2="335" stroke="#1A1A1A" stroke-width="2"/>
+  <text x="70" y="360" font-family="monospace" font-size="14" fill="#1A1A1A" font-weight="bold">PREMIUM CATALOGUE</text>
+
+  <!-- Catalog Items -->
+  <!-- Item 1: Banarasi Silk -->
+  <rect x="70" y="380" width="195" height="145" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <rect x="80" y="390" width="175" height="85" fill="#E5E5E5"/>
+  <!-- Traditional motif representation -->
+  <circle cx="167" cy="432" r="15" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+  <path d="M 167 412 L 167 452 M 147 432 L 187 432" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="80" y="495" font-family="serif" font-size="14" fill="#1A1A1A" font-weight="bold">Banarasi Silk</text>
+  <text x="80" y="513" font-family="monospace" font-size="10" fill="#1A1A1A" opacity="0.8">Red & Gold Zari Brocade</text>
+
+  <!-- Item 2: Luxury Organza -->
+  <rect x="297" y="380" width="195" height="145" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+  <rect x="307" y="390" width="175" height="85" fill="#E5E5E5"/>
+  <!-- Abstract sheer organza fold representation -->
+  <path d="M 320 460 Q 395 400 470 460" fill="none" stroke="#1A1A1A" stroke-width="1.5"/>
+  <path d="M 320 440 Q 395 380 470 440" fill="none" stroke="#1A1A1A" stroke-width="1" opacity="0.6"/>
+  <text x="307" y="495" font-family="serif" font-size="14" fill="#1A1A1A" font-weight="bold">Luxury Organza</text>
+  <text x="307" y="513" font-family="monospace" font-size="10" fill="#1A1A1A" opacity="0.8">Designer Hand Embroidery</text>
+
+  <!-- Item 3: Admin Portal Panel Interface preview -->
+  <rect x="525" y="380" width="205" height="145" fill="#1A1A1A"/>
+  <text x="545" y="415" font-family="monospace" font-size="14" fill="#F5F5F5" font-weight="bold">Catalog Manager</text>
+  <rect x="545" y="435" width="165" height="25" fill="#F5F5F5"/>
+  <text x="627" y="452" font-family="monospace" font-size="10" fill="#1A1A1A" text-anchor="middle" font-weight="bold">Enter Passcode</text>
+  <rect x="545" y="475" width="75" height="25" fill="none" stroke="#F5F5F5" stroke-width="1"/>
+  <text x="582" y="491" font-family="monospace" font-size="9" fill="#F5F5F5" text-anchor="middle">Save Changes</text>
+  <rect x="635" y="475" width="75" height="25" fill="none" stroke="#F5F5F5" stroke-width="1"/>
+  <text x="672" y="491" font-family="monospace" font-size="9" fill="#F5F5F5" text-anchor="middle">Add Model</text>
+</svg>

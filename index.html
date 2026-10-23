@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-auto cursor-default">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhumit Ahir | v2.0</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'kindle-bg': '#F5F5F5',
+                        'kindle-ink': '#1A1A1A',
+                    },
+                    fontFamily: {
+                        serif: ['"Source Serif Pro"', '"Playfair Display"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    cursor: {
+                        'default': 'url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M0 0l6 18 3-7 8 2-17-13z"/></svg>), auto',
+                        'pointer': 'url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 2l-1 5h-4l-3 15h16l2-12h-5l1-8z"/></svg>), pointer',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS & SVG Filters -->
+    <style>
+        body {
+            background-color: #F5F5F5;
+            color: #1A1A1A;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Border Utility */
+        .ink-border {
+            border: 2px solid #1A1A1A;
+        }
+
+
+
+        /* Toast Feedback */
+        #copy-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1A1A1A;
+            color: #22C55E;
+            border: 2px solid #22C55E;
+            padding: 10px 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 100001;
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        #copy-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dither Filter Class */
+        .dither-img {
+            filter: grayscale(100%) contrast(150%) url(#dither-filter);
+        }
+
+        /* Flash Animation Overlay */
+        #flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            display: none;
+        }
+
+        .flash-anim {
+            display: block !important;
+            animation: flashCycle 0.6s steps(2, end) forwards;
+        }
+
+        @keyframes flashCycle {
+            0% {
+                background: #1A1A1A;
+                opacity: 1;
+            }
+
+            50% {
+                background: #F5F5F5;
+                opacity: 1;
+            }
+
+            100% {
+                background: transparent;
+                opacity: 0;
+            }
+        }
+
+        /* Selection */
+        ::selection {
+            background: #1A1A1A;
+            color: #F5F5F5;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            appearance: none;
+            width: 1.25em;
+            height: 1.25em;
+            border: 2px solid #1A1A1A;
+            display: inline-grid;
+            place-content: center;
+        }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em #1A1A1A;
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+
+        /* Terminal Cursor Blink */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Hacker Text Selection */
+        ::selection {
+            background: #22C55E;
+            /* Tailwind green-500 */
+            color: #000000;
+        }
+
+        /* Typewriter Cursor */
+        .typewriter-cursor::after {
+            content: '█';
+            color: #22C55E;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        /* Coder Hover Effect (Invert & Transition) */
+        .coder-hover {
+            transition: all 0.1s step-end;
+            /* "Digital" feel */
+            position: relative;
+        }
+
+        .coder-hover:hover {
+            background-color: #1A1A1A !important;
+            color: #FFFFFF !important;
+            text-shadow: 2px 2px 0px #22C55E;
+            /* Hard Green Shadow */
+            border-color: #22C55E !important;
+            box-shadow: -4px 4px 0px rgba(34, 197, 94, 0.3);
+            transform: translate(2px, -2px);
+        }
+
+        /* Force children to inherit white+shadow on hover */
+        .coder-hover:hover * {
+            color: #FFFFFF !important;
+            text-shadow: 2px 2px 0px #22C55E;
+            border-color: #22C55E !important;
+        }
+
+        /* HACK MODE STYLES */
+        body.hack-mode {
+            background-color: #000000 !important;
+            color: #00FF00 !important;
+        }
+
+        body.hack-mode * {
+            border-color: #00FF00 !important;
+            color: #00FF00 !important;
+        }
+
+        body.hack-mode .dither-img {
+            filter: grayscale(100%) contrast(200%) brightness(1.2) drop-shadow(0 0 5px #00FF00);
+        }
+
+        body.hack-mode ::selection {
+            background: #00FF00;
+            color: #000000;
+        }
+
+        /* DEBUG MODE STYLES */
+        body.debug-mode * {
+            outline: 1px solid red !important;
+        }
+
+        /* BOOT OVERLAY */
+        #boot-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 100000;
+            /* Above everything */
+            display: none;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #22C55E;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body class="min-h-screen font-serif relative w-full bg-[#F5F5F5] text-[#1A1A1A] m-0 p-0 overflow-x-hidden"
+    id="main-body">
+<script>
+    // Critical Path: Instant Transition Check (Anti-Flash)
+    if (sessionStorage.getItem('portfolio_entered') === 'true') {
+        document.write('<style>#entry-screen { display: none !important; } #site-content { display: block !important; opacity: 1 !important; }</style>');
+    }
+</script>
+
+<!-- Click-to-Enter Overlay -->
+<div id="entry-screen"
+    class="fixed inset-0 bg-[#F5F5F5] z-[99999] flex flex-col items-center justify-center cursor-pointer select-none">
+    <div class="group flex flex-col items-center gap-4 transition-transform duration-300 hover:scale-105">
+        <!-- File Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-16 h-16 text-[#1A1A1A] fill-[#1A1A1A]/5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+        </svg>
+        <!-- Text -->
+        <div
+            class="font-mono text-sm uppercase tracking-widest text-[#1A1A1A] group-hover:underline decoration-2 underline-offset-4">
+            Click to Open Portfolio
+        </div>
+    </div>
+</div>
+
+<!-- Boot Sequence Overlay -->
+<div id="boot-overlay">
+    <div id="boot-log"></div>
+</div>
+
+<!-- Screen Flash Overlay -->
+<div id="flash-overlay"></div>
+
+<!-- SVG Filter Definition for Dithering -->
+<svg class="hidden">
+    <defs>
+        <filter id="dither-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" in="noise"
+                result="coloredNoise" />
+            <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+            <feBlend mode="overlay" in="composite" in2="SourceGraphic" />
+        </filter>
+    </defs>
+</svg>
+
+<!-- Top Status Bar (V1 Style) -->
+<div id="site-content" style="display:none; opacity: 0;" class="transition-opacity duration-1000 w-full min-h-screen">
+    <!-- Top Status Bar (V1 Style) -->
+    <div
+        class="border-b-2 border-[#1A1A1A] px-4 sm:px-8 lg:px-12 py-2.5 flex flex-wrap justify-between items-center text-xs uppercase tracking-widest bg-[#F5F5F5] sticky top-0 z-50 font-mono gap-2 w-full">
+        <div class="flex items-center gap-3">
+            <div id="clock"></div>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- System Monitor Widget -->
+            <div class="hidden md:flex gap-4 opacity-50">
+                <span id="mon-vel">VEL: 0px/s</span>
+                <span id="mon-scr">SCR: 0%</span>
+                <span id="mon-tme">TME: 00:00</span>
+            </div>
+
+            <div class="h-4 w-[2px] bg-[#1A1A1A] mx-2 hidden md:block"></div>
+
+            <span id="status-conn"></span>
+            <div class="flex items-center gap-1">
+                <span id="status-batt"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                    stroke="currentColor" class="w-4 h-4 text-[#1A1A1A]">
+                    <path stroke-linecap="square" stroke-linejoin="miter"
+                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header (Full Page Responsive) -->
+    <header class="w-full px-6 sm:px-12 lg:px-16 py-8 sm:py-12 border-b-2 border-[#1A1A1A] flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12 bg-[#F5F5F5]">
+        <!-- Profile Image -->
+        <div class="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-[#1A1A1A] shrink-0 relative shadow-sm">
+            <img src="profile_v3.jpg" alt="Bhumit Ahir" class="w-full h-full object-cover dither-img scale-110">
+            <!-- Overlay for extra grain texture -->
+            <div
+                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none mix-blend-multiply">
+            </div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="text-center md:text-left flex-grow">
+            <!-- Added blinking cursor to title -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-2 font-serif">Bhumit Ahir<span
+                    class="text-green-600 animate-pulse">_</span></h1>
+            <div
+                class="typewriter-target font-mono text-xs md:text-sm font-bold border-y-2 border-[#1A1A1A] py-2 inline-block md:block uppercase tracking-wide min-h-[36px] md:min-h-[24px]">
+                Full-Stack Developer | Mobile App Data Analyst Intern @ Logicgo Infotech | B.Tech CSE (Data Science)
+            </div>
+
+            <div class="mt-4 text-base md:text-lg leading-relaxed font-serif max-w-3xl">
+                <p>I am a B.Tech CSE (Data Science) student and <span class="font-bold border-b-2 border-[#1A1A1A]">Mobile App Data Analyst Intern at Logicgo Infotech</span>, focused on building clean, high-performance digital systems and deriving actionable product telemetry. My philosophy is <span
+                        class="italic font-bold bg-[#1A1A1A] text-[#F5F5F5] px-1">'Function over Friction.'</span>
+                </p>
+                <p class="mt-2 text-sm md:text-base">
+                    Beyond code, I apply engineering to real-world ecosystems: analyzing user retention and telemetry, engineering local-first tools like <span class="font-bold border-b-2 border-[#1A1A1A]">TabFlow Extension</span>, and building 100% offline digital wellbeing systems like <span class="font-bold border-b-2 border-[#1A1A1A]">Bodh</span>.
+                </p>
+            </div>
+
+            <!-- Mail & Contact Quick Actions -->
+            <div class="mt-6 flex flex-wrap gap-2.5 justify-center md:justify-start font-mono text-xs">
+                <a href="mailto:office.bhumitahir@gmail.com"
+                    class="px-4 py-2 bg-[#1A1A1A] text-[#F5F5F5] border-2 border-[#1A1A1A] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none inline-flex items-center gap-1.5 shadow-sm">
+                    <span>✉</span> <span>MAIL: office.bhumitahir@gmail.com</span>
+                </a>
+                <button onclick="copyEmailToClipboard()"
+                    class="px-4 py-2 bg-[#F5F5F5] text-[#1A1A1A] border-2 border-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-none inline-flex items-center gap-1.5 cursor-pointer">
+                    <span>📋</span> <span>COPY EMAIL</span>
+                </button>
+                <a href="#projects-archive"
+                    class="px-4 py-2 bg-[#F5F5F5] text-[#1A1A1A] border-2 border-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-none inline-flex items-center gap-1.5">
+                    <span>📂</span> <span>VIEW ARCHIVE (06)</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Grid (Full-Width Responsive 12-Columns) -->
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 min-h-screen border-b-2 border-[#1A1A1A]" id="projects-archive">
+
+        <!-- Left Column: The Archive (Projects) - 8 Columns -->
+        <main class="lg:col-span-8 border-r-0 lg:border-r-2 border-[#1A1A1A] flex flex-col">
+            <div class="border-b-2 border-[#1A1A1A] p-4 sm:px-8 bg-[#1A1A1A] text-[#F5F5F5] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <h2 class="font-mono font-bold text-lg px-2">THE ARCHIVE (PROJECTS)</h2>
+                <!-- Filter Pills -->
+                <div class="flex flex-wrap gap-1.5 px-2" id="project-filters">
+                    <button onclick="filterProjects('all', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#F5F5F5] text-[#1A1A1A] font-bold border border-[#F5F5F5] cursor-pointer">ALL (6)</button>
+                    <button onclick="filterProjects('system', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">SYSTEMS</button>
+                    <button onclick="filterProjects('android', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">ANDROID</button>
+                    <button onclick="filterProjects('extension', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">EXTENSIONS</button>
+                </div>
+            </div>
+
+            <!-- Project Cards Grid (2-Column Tiled Layout on Wide Screens) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 flex-grow">
+                <!-- Project 01: Minimalist Launcher -->
+                <a href="project_launcher.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="android">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">
+                                    Project 01: Minimalist Launcher</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[IN DEVELOPING STAGE]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">A distraction-free UI designed to reduce screen time and break unconscious scrolling impulses. Focus on what matters, not the noise.</p>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Project 02: Wisdom Widget -->
+                <a href="project_wisdom.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="android">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 02: Wisdom Widget</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[NOW AVAILABLE ONLY ON PLAY STORE]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">A minimalist home screen widget delivering daily quotes and Sanskrit shloks. Engineered with AlarmManager for near-zero battery overhead.</p>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Project 03: NEXHR Core Platform -->
+                <a href="project_hrms.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2 bg-[#FAFAFA]" data-category="system">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 03: NEXHR Platform</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 bg-[#1A1A1A] text-[#F5F5F5] shrink-0">FULLSTACK</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[IN DEVELOPING STAGE]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">An AI-powered Workforce Intelligence and HRMS monorepo: GPS-verified attendance clock, shift timeline metrics, RBAC permissions, and automated payroll reporting.</p>
+                            
+                            <!-- Mockup Preview -->
+                            <div class="mt-4 border-2 border-[#1A1A1A] bg-[#FFFFFF] p-2 flex justify-center shadow-sm">
+                                <img src="mockup_hrms.svg" alt="NEXHR Dashboard Mockup Preview" class="w-full h-auto object-contain max-h-44 border border-[#1A1A1A]/20">
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Project 04: Retail Billing System -->
+                <a href="project_billing.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="system">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 04: Retail Billing System</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">WEB / POS</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">A robust, no-nonsense billing and inventory management system designed for small retail businesses, using keyboard-first navigation for rapid checkout.</p>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Project 05: TabFlow Chrome Extension -->
+                <a href="project_tabflow.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="extension">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 05: TabFlow Extension</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">CHROME / MV3</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">A local-first, distraction-free Chrome workspace organizer built with Manifest V3, Side Panel API, and duplicate tab detection with zero external telemetry.</p>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Project 06: Bodh Digital Wellbeing -->
+                <a href="project_bodh.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="android">
+                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 06: Bodh App</h3>
+                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID / KOTLIN</span>
+                            </div>
+                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
+                            <p class="font-serif leading-relaxed text-sm sm:text-base">A 100% offline mindful wellbeing app built with Jetpack Compose, UsageStatsManager, and deliberate breath-friction gates without requesting INTERNET permission.</p>
+                            
+                            <!-- Mockup Preview -->
+                            <div class="mt-4 border-2 border-[#1A1A1A] bg-[#FFFFFF] p-2 flex justify-center shadow-sm">
+                                <img src="mockup_bodh.svg" alt="Bodh App Mockup Preview" class="w-full h-auto object-contain max-h-44 border border-[#1A1A1A]/20">
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- The Stack -->
+                <a href="stack.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="all">
+                    <article class="p-6 sm:p-8 bg-[#1A1A1A] text-[#F5F5F5] hover:bg-[#2A2A2A] transition-colors cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">THE_STACK.JSON</h3>
+                                <span class="text-xs font-bold border border-[#F5F5F5] px-1 shrink-0">HARDWARE</span>
+                            </div>
+                            <p class="font-serif opacity-90 leading-relaxed text-sm sm:text-base">My digital arsenal. Detailed breakdown of the machines, OS setups, and gear that power my daily workflow.</p>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Offline Mode -->
+                <a href="offline.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="all">
+                    <article class="p-6 sm:p-8 bg-[#1A1A1A] text-[#F5F5F5] hover:bg-[#2A2A2A] transition-colors cursor-pointer h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-baseline mb-2 gap-2">
+                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">OFFLINE_MODE</h3>
+                                <span class="text-xs font-bold border border-[#F5F5F5] px-1 shrink-0">PERSONAL</span>
+                            </div>
+                            <p class="font-serif opacity-90 leading-relaxed text-sm sm:text-base">Beyond the code. Athletics, reading, and the "Fast Learner" relentless discipline mindset inspired by Virat Kohli.</p>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </main>
+
+        <!-- Right Column: Skills & System Specs - 4 Columns -->
+        <aside class="lg:col-span-4 flex flex-col h-full border-t-2 lg:border-t-0 border-[#1A1A1A] bg-[#1A1A1A] text-[#F5F5F5]">
+
+            <!-- Experience & Skills -->
+            <div class="flex-grow bg-[#1A1A1A] text-[#F5F5F5] font-mono text-xs overflow-hidden">
+                <div class="border-b-2 border-[#F5F5F5] p-4 text-[#F5F5F5]">
+                    <h2 class="font-bold text-lg px-2">RUNTIME_ENVIRONMENT.LOG</h2>
+                </div>
+                <!-- ASCII Dashboard -->
+                <div class="p-6 sm:p-8 space-y-6">
+
+                    <!-- Section 0: Current Internship Role -->
+                    <div>
+                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CURRENT_ROLE]</div>
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between">
+                                <span class="opacity-70">ROLE</span>
+                                <span class="text-green-400 font-bold">DATA_ANALYST</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">ORG</span>
+                                <span class="text-yellow-400 font-bold">Logicgo Infotech</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">STATUS</span>
+                                <span class="text-green-500 font-bold">INTERN_ACTIVE</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">FOCUS</span>
+                                <span class="text-blue-400">Mobile Telemetry</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 1: System Status -->
+                    <div>
+                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[SYSTEM_STATUS]</div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between">
+                                <span class="opacity-70">PILOT_STATE</span>
+                                <span class="text-green-500">ONLINE</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">EDUCATION</span>
+                                <span class="text-green-500">B.TECH CSE (DS)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">AI_ASSIST</span>
+                                <span class="text-blue-400">ACTIVE_v2.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Core Variables -->
+                    <div>
+                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CORE_VARIABLES]</div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between">
+                                <span class="opacity-70">ADAPTABILITY</span>
+                                <span class="text-yellow-500">[MAXIMUM]</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">LEARNING_RATE</span>
+                                <span>0.99 (EXTREME)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-70">CORE_STACK</span>
+                                <span class="text-purple-400">Python • Node • Kotlin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Capabilities -->
+                    <div>
+                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CAPABILITIES_MATRIX]</div>
+
+                        <div class="mb-2">
+                            <div class="flex justify-between mb-1">
+                                <span>DATA_ANALYTICS</span>
+                            </div>
+                            <div class="tracking-tighter text-green-500">[||||||||||]</div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="flex justify-between mb-1">
+                                <span>RAPID_PROTOTYPE</span>
+                            </div>
+                            <div class="tracking-tighter text-blue-400">[||||||||||]</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>SYSTEM_DESIGN</span>
+                            </div>
+                            <div class="tracking-tighter text-yellow-500 opacity-80">[||||||||..]</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Core Philosophy Card (Clean without console prompt) -->
+            <div
+                class="border-t-2 border-[#333] p-6 sm:p-8 font-mono text-xs bg-[#1A1A1A] text-[#F5F5F5] flex flex-col justify-end">
+                <div class="opacity-50 text-[10px] tracking-widest uppercase mb-2">[CORE_PHILOSOPHY]</div>
+                <div class="italic font-serif text-sm leading-relaxed text-[#F5F5F5] border-l-2 border-[#22C55E] pl-3 py-1">
+                    "Build things that respect human attention.<br>
+                    Data must tell a precise story.<br>
+                    Function over Friction."
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <!-- Footer (Full Width) -->
+    <footer id="connect" class="w-full px-6 sm:px-12 lg:px-16 py-12 sm:py-16 text-center bg-[#1A1A1A] text-[#F5F5F5]">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-left">
+                <p class="font-serif text-2xl font-bold mb-1">Let's Connect.</p>
+                <p class="text-sm opacity-80 font-mono">Open for mobile analytics, data science, & full-stack development.</p>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+                <a href="mailto:office.bhumitahir@gmail.com"
+                    class="px-5 py-3 border-2 border-[#22C55E] text-[#22C55E] font-bold hover:bg-[#22C55E] hover:text-[#000000] transition-none uppercase text-xs flash-active font-mono">✉ office.bhumitahir@gmail.com</a>
+                <button onclick="copyEmailToClipboard()"
+                    class="px-4 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono cursor-pointer">📋 Copy Email</button>
+                <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer"
+                    class="px-5 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono">GitHub</a>
+                <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer"
+                    class="px-5 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono">LinkedIn</a>
+            </div>
+        </div>
+
+        <div
+            class="mt-12 pt-6 border-t border-[#F5F5F5] border-opacity-20 flex flex-col sm:flex-row justify-between items-center text-xs font-mono uppercase tracking-widest gap-2">
+            <div>
+                © 2024 Bhumit Ahir • Logicgo Infotech Intern
+            </div>
+            <div id="last-synced">
+                Last Synced: Loading...
+            </div>
+        </div>
+    </footer>
+</div> <!-- Close #site-content -->
+
+<!-- Retro Toast Container -->
+<div id="copy-toast">COPIED TO CLIPBOARD: office.bhumitahir@gmail.com</div>
+
+<!-- Scripts -->
+<script>
+    // Clock Script
+    function updateClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
+
+        const dateString = now.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' });
+        const lastSynced = document.getElementById('last-synced');
+        if (lastSynced) lastSynced.textContent = "Last Synced: " + dateString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Screen Flash Interaction
+    const flashOverlay = document.getElementById('flash-overlay');
+
+    function triggerFlash() {
+        // Reset animation
+        flashOverlay.classList.remove('flash-anim');
+        void flashOverlay.offsetWidth; // Trigger reflow
+        flashOverlay.classList.add('flash-anim');
+    }
+
+    // Attach flash to all links and interactive elements
+    document.querySelectorAll('a, button, article, label').forEach(el => {
+        el.addEventListener('click', (e) => {
+            triggerFlash();
+        });
+    });
+
+    // --- TERMINAL & SOUND SYSTEM ---
+
+    // Web Audio API Context
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let isAudioMuted = false;
+
+    function toggleAudio() {
+        isAudioMuted = !isAudioMuted;
+        const ind = document.getElementById('sound-indicator');
+        const txt = document.getElementById('sound-text');
+        if (isAudioMuted) {
+            if (ind) ind.textContent = "🔇";
+            if (txt) txt.textContent = "AUDIO: OFF";
+            showToast("AUDIO MUTED");
+        } else {
+            if (ind) ind.textContent = "🔊";
+            if (txt) txt.textContent = "AUDIO: ON";
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            playSound('click');
+            showToast("AUDIO ACTIVE");
+        }
+    }
+
+    function toggleTheme() {
+        document.body.classList.toggle('hack-mode');
+        const themeTxt = document.getElementById('theme-text');
+        if (document.body.classList.contains('hack-mode')) {
+            if (themeTxt) themeTxt.textContent = "THEME: MATRIX";
+            showToast("THEME: MATRIX HACK MODE");
+            printToTerminal("SYSTEM COMPILED. MATRIX / CYBER THEME ACTIVE.");
+        } else {
+            if (themeTxt) themeTxt.textContent = "THEME: PAPER";
+            showToast("THEME: KINDLE PAPER");
+            printToTerminal("SYSTEM RESTORED. KINDLE PAPER THEME ACTIVE.");
+        }
+    }
+
+    function playSound(type) {
+        if (isAudioMuted) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+            // Mechanical Click (Square wave + noise-like drop)
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(300, now);
+            osc.frequency.exponentialRampToValueAtTime(100, now + 0.08);
+            gainNode.gain.setValueAtTime(0.1, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.start(now);
+            osc.stop(now + 0.08);
+        } else if (type === 'typeKey') {
+            // Typewriter Key (High pitch, very short)
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.exponentialRampToValueAtTime(300, now + 0.03);
+            gainNode.gain.setValueAtTime(0.05, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+            osc.start(now);
+            osc.stop(now + 0.03);
+        }
+    }
+
+    // Terminal Logic
+    const defaultPrompt = "visitor@portfolio:~$";
+
+    // Global Click Listener (Sound + Nav Delay)
+    document.addEventListener('click', (e) => {
+        const interactive = e.target.closest('a, button, article, input, label');
+        if (interactive) {
+            playSound('click');
+
+            const link = e.target.closest('a');
+            if (link) {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && !href.startsWith('mailto:') && !link.target && !href.startsWith('#')) {
+                    e.preventDefault();
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 120);
+                }
+            }
+        }
+    });
+
+    // Bottom console removed per user request
+    function printToTerminal(content, isCommand = false) {
+        console.log('[LOG]:', content);
+    }
+
+    // Footer Console hidden as requested - functions preserved for programmatic/console interaction
+    const termInput = document.getElementById('terminal-input');
+    const helperEl = document.getElementById('cmd-helper');
+
+    function showHelper() { if (helperEl) helperEl.classList.add('visible'); }
+    function hideHelper() { if (helperEl) helperEl.classList.remove('visible'); }
+
+    if (termInput) {
+        termInput.addEventListener('focus', showHelper);
+        termInput.addEventListener('blur', () => setTimeout(hideHelper, 250));
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.trim().toLowerCase();
+                if (cmd) processCommand(cmd);
+                termInput.value = '';
+            }
+        });
+    }
+
+    function executeChip(cmd) {
+        if (termInput) termInput.value = cmd;
+        processCommand(cmd);
+        if (termInput) termInput.value = '';
+    }
+
+    window.runCommand = processCommand;
+
+    // Core Command Processor (Rich Console, No Alerts)
+    function processCommand(cmd) {
+        playSound('typeKey');
+        printToTerminal(cmd, true);
+
+        switch (cmd) {
+            case 'help':
+                printToTerminal(`
+<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
+    <div class="text-green-400 font-bold border-b border-green-900 pb-1">AVAILABLE TERMINAL COMMANDS:</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px]">
+        <div><span class="text-yellow-400 font-bold">ls</span> - List all 6 archive projects</div>
+        <div><span class="text-yellow-400 font-bold">whoami</span> - Identity, role & academic background</div>
+        <div><span class="text-yellow-400 font-bold">exp</span> - Logicgo Infotech internship details</div>
+        <div><span class="text-yellow-400 font-bold">mail</span> - Copy email & open mail client</div>
+        <div><span class="text-yellow-400 font-bold">open [1-6]</span> - Jump to project (e.g. 'open 5' or 'open tabflow')</div>
+        <div><span class="text-yellow-400 font-bold">hack</span> - Toggle Matrix cyber theme</div>
+        <div><span class="text-yellow-400 font-bold">debug</span> - Toggle red inspection outlines</div>
+        <div><span class="text-yellow-400 font-bold">clear</span> - Clear output screen buffer</div>
+    </div>
+</div>`);
+                break;
+
+            case 'whoami':
+                printToTerminal(`
+<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
+    <div class="text-green-400 font-bold">PILOT PROFILE:</div>
+    <div><strong>NAME:</strong>       Bhumit Ahir</div>
+    <div><strong>ROLE:</strong>       <span class="text-yellow-400 font-bold">Mobile App Data Analyst Intern @ Logicgo Infotech</span></div>
+    <div><strong>STUDIES:</strong>    B.Tech CSE (Data Science)</div>
+    <div><strong>PHILOSOPHY:</strong> <span class="text-green-300">"Function over Friction."</span></div>
+    <div><strong>EMAIL:</strong>      <a href="mailto:office.bhumitahir@gmail.com" class="text-blue-400 underline">office.bhumitahir@gmail.com</a></div>
+    <div><strong>STATUS:</strong>     Active & open for collaborations</div>
+</div>`);
+                break;
+
+            case 'exp':
+            case 'internship':
+            case 'experience':
+                printToTerminal(`
+<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
+    <div class="text-green-400 font-bold">// INTERNSHIP LOG:</div>
+    <div><strong>COMPANY:</strong>  <span class="text-yellow-400 font-bold">Logicgo Infotech</span></div>
+    <div><strong>POSITION:</strong> Mobile App Data Analyst Intern</div>
+    <div><strong>FOCUS:</strong>    App telemetry metrics, retention funnels, behavioral analytics & data visualization</div>
+    <div><strong>STACK:</strong>    Python, SQL, Analytics Frameworks, Automation APIs</div>
+</div>`);
+                break;
+
+            case 'ls':
+            case 'projects':
+                printToTerminal(`
+<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
+    <div class="text-green-400 font-bold">// THE ARCHIVE (06 PROJECTS):</div>
+    <div class="space-y-0.5 text-[11px]">
+        <div>[01] Minimalist Launcher         (Android)   -> <span class="text-green-400">[IN DEVELOPING STAGE]</span></div>
+        <div>[02] Wisdom Widget               (Android)   -> <span class="text-green-400">[ON PLAY STORE]</span></div>
+        <div>[03] NEXHR Platform              (FullStack) -> <span class="text-green-400 font-bold">[IN DEVELOPING STAGE]</span></div>
+        <div>[04] Retail Billing System       (Web/POS)   -> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
+        <div>[05] TabFlow Chrome Extension    (Chrome MV3)-> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
+        <div>[06] Bodh Digital Wellbeing      (Android)   -> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
+    </div>
+    <div class="text-[10px] opacity-70 mt-1">Tip: Type 'open 5' or 'open tabflow' to jump directly to any page.</div>
+</div>`);
+                break;
+
+            case 'mail':
+            case 'email':
+            case 'contact':
+                copyEmailToClipboard();
+                printToTerminal(`
+<div class="border border-green-700 bg-black/60 p-2.5">
+    <div class="text-green-400 font-bold">DISPATCHING MAIL ACTION...</div>
+    <div>Recipient: <span class="text-yellow-400">office.bhumitahir@gmail.com</span></div>
+    <div>Status: Email address copied to clipboard. Launching default client...</div>
+</div>`);
+                setTimeout(() => { window.location.href = "mailto:office.bhumitahir@gmail.com"; }, 500);
+                break;
+
+            case 'clear':
+            case 'cls':
+                clearTerminalScreen();
+                break;
+
+            case 'open 1':
+            case 'open 01':
+            case 'open launcher':
+                printToTerminal("Navigating to Minimalist Launcher...");
+                setTimeout(() => window.location.href = 'project_launcher.html', 250);
+                break;
+            case 'open 2':
+            case 'open 02':
+            case 'open wisdom':
+                printToTerminal("Navigating to Wisdom Widget...");
+                setTimeout(() => window.location.href = 'project_wisdom.html', 250);
+                break;
+            case 'open 3':
+            case 'open 03':
+            case 'open nexhr':
+            case 'open hrms':
+                printToTerminal("Navigating to NEXHR Platform [IN DEVELOPING STAGE]...");
+                setTimeout(() => window.location.href = 'project_hrms.html', 250);
+                break;
+            case 'open 4':
+            case 'open 04':
+            case 'open billing':
+                printToTerminal("Navigating to Retail Billing System [DEVELOPED]...");
+                setTimeout(() => window.location.href = 'project_billing.html', 250);
+                break;
+            case 'open 5':
+            case 'open 05':
+            case 'open tabflow':
+            case 'open tab':
+                printToTerminal("Navigating to TabFlow Chrome Extension [DEVELOPED]...");
+                setTimeout(() => window.location.href = 'project_tabflow.html', 250);
+                break;
+            case 'open 6':
+            case 'open 06':
+            case 'open bodh':
+                printToTerminal("Navigating to Bodh Digital Wellbeing [DEVELOPED]...");
+                setTimeout(() => window.location.href = 'project_bodh.html', 250);
+                break;
+
+            case 'hack':
+            case 'matrix':
+                toggleTheme();
+                break;
+
+            case 'debug':
+                document.body.classList.toggle('debug-mode');
+                printToTerminal("DEBUG MODE TOGGLED (Red DOM inspection outlines active).");
+                break;
+
+            default:
+                if (cmd !== "") {
+                    printToTerminal(`<span class="text-red-400">Command not recognized: "${cmd}". Type 'help' for command directory.</span>`);
+                }
+        }
+    }
+
+    // --- PROJECT FILTERING ---
+    function filterProjects(category, btn) {
+        playSound('click');
+        document.querySelectorAll('.filter-pill').forEach(p => {
+            p.classList.remove('bg-[#F5F5F5]', 'text-[#1A1A1A]', 'font-bold');
+            p.classList.add('bg-[#262626]', 'text-[#F5F5F5]');
+        });
+        if (btn) {
+            btn.classList.add('bg-[#F5F5F5]', 'text-[#1A1A1A]', 'font-bold');
+            btn.classList.remove('bg-[#262626]', 'text-[#F5F5F5]');
+        }
+        document.querySelectorAll('.project-item').forEach(item => {
+            const cat = item.getAttribute('data-category');
+            if (category === 'all' || cat === category || cat === 'all') {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // --- EMAIL CLIPBOARD & TOAST ---
+    function copyEmailToClipboard() {
+        const email = "office.bhumitahir@gmail.com";
+        navigator.clipboard.writeText(email).then(() => {
+            showToast("COPIED: " + email);
+            printToTerminal(`[CLIPBOARD]: "${email}" copied successfully.`);
+        }).catch(() => {
+            showToast("EMAIL: " + email);
+        });
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('copy-toast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // --- SYSTEM MONITOR LOGIC ---
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let mouseTimestamp = Date.now();
+    const velEl = document.getElementById('mon-vel');
+    const scrEl = document.getElementById('mon-scr');
+    const tmeEl = document.getElementById('mon-tme');
+
+    let seconds = 0;
+    setInterval(() => {
+        seconds++;
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        if (tmeEl) tmeEl.textContent = `TME: ${m}:${s}`;
+    }, 1000);
+
+    window.addEventListener('scroll', () => {
+        const percent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) || 0;
+        if (scrEl) scrEl.textContent = `SCR: ${percent}%`;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        const dt = now - mouseTimestamp;
+        if (dt > 100) {
+            const dx = e.clientX - lastMouseX;
+            const dy = e.clientY - lastMouseY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const speed = Math.round((dist / dt) * 1000);
+
+            if (velEl) velEl.textContent = `VEL: ${speed}px/s`;
+
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            mouseTimestamp = now;
+        }
+    });
+
+    // --- TYPEWRITER EFFECT ---
+    const typeTarget = document.querySelector('.typewriter-target');
+    if (typeTarget) {
+        const fullText = "Full-Stack Developer | Mobile App Data Analyst Intern @ Logicgo Infotech | B.Tech CSE (Data Science)";
+
+        if (sessionStorage.getItem('portfolio_entered') === 'true') {
+            typeTarget.innerText = fullText;
+            typeTarget.classList.remove('typewriter-cursor');
+        } else {
+            typeTarget.innerText = "";
+            typeTarget.classList.add('typewriter-cursor');
+
+            let charIndex = 0;
+            function typeStep() {
+                if (charIndex < fullText.length) {
+                    typeTarget.innerText = fullText.substring(0, charIndex + 1);
+                    charIndex++;
+                    setTimeout(typeStep, 25 + Math.random() * 30);
+                } else {
+                    typeTarget.classList.remove('typewriter-cursor');
+                }
+            }
+            setTimeout(typeStep, 600);
+        }
+    }
+
+    // --- ENTRY SCREEN & INITIALIZATION ---
+    window.addEventListener('load', () => {
+        const entryScreen = document.getElementById('entry-screen');
+        const siteContent = document.getElementById('site-content');
+
+        if (siteContent && !sessionStorage.getItem('portfolio_entered')) {
+            siteContent.style.display = 'none';
+            siteContent.style.opacity = '0';
+        }
+
+        if (sessionStorage.getItem('portfolio_entered') === 'true') {
+            if (entryScreen) entryScreen.style.display = 'none';
+            if (siteContent) {
+                siteContent.style.display = 'block';
+                siteContent.style.opacity = '1';
+                siteContent.classList.remove('opacity-0');
+
+                const connEl = document.getElementById('status-conn');
+                const battEl = document.getElementById('status-batt');
+                if (connEl) connEl.textContent = "Connected";
+                if (battEl) battEl.textContent = "100%";
+            }
+        } else {
+            if (entryScreen) {
+                entryScreen.addEventListener('click', () => {
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+                    playSound('click');
+
+                    sessionStorage.setItem('portfolio_entered', 'true');
+
+                    entryScreen.style.transition = "opacity 0.5s ease-out";
+                    entryScreen.style.opacity = "0";
+                    setTimeout(() => {
+                        entryScreen.style.display = "none";
+                        if (siteContent) {
+                            siteContent.style.display = "block";
+                            setTimeout(() => {
+                                siteContent.style.opacity = '1';
+                                siteContent.classList.remove('opacity-0');
+                            }, 50);
+                        }
+                        triggerFlash();
+                        startTopBarTypewriter();
+                    }, 400);
+                });
+            }
+        }
+    });
+
+    // --- BOOT SEQUENCE TRANSITION ---
+    const bootOverlay = document.getElementById('boot-overlay');
+    const bootLog = document.getElementById('boot-log');
+
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#' || href.startsWith('mailto:') || href.startsWith('#') || link.target === '_blank') return;
+
+            e.preventDefault();
+            runBootSequence(href);
+        });
+    });
+
+    function runBootSequence(url) {
+        if (!bootOverlay) {
+            window.location.href = url;
+            return;
+        }
+
+        bootOverlay.style.display = 'flex';
+        playSound('typeKey');
+
+        const logs = [
+            "Initializing connection...",
+            "Resolving host...",
+            "Handshaking...",
+            "Loading modules...",
+            "Executing..."
+        ];
+
+        let i = 0;
+        bootLog.innerHTML = "";
+
+        const interval = setInterval(() => {
+            if (i < logs.length) {
+                const line = document.createElement('div');
+                line.textContent = `> ${logs[i]}`;
+                bootLog.appendChild(line);
+                playSound('typeKey');
+                i++;
+            } else {
+                clearInterval(interval);
+                window.location.href = url;
+            }
+        }, 70);
+    }
+
+    function startTopBarTypewriter() {
+        const clockEl = document.getElementById('clock');
+        const connEl = document.getElementById('status-conn');
+        const battEl = document.getElementById('status-batt');
+
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const timeStr = `${hours}:${minutes} ${ampm}`;
+
+        if (clockEl) typewriterWithSound(clockEl, timeStr, 100);
+        if (connEl) setTimeout(() => typewriterWithSound(connEl, "Connected", 80), 1000);
+        if (battEl) setTimeout(() => typewriterWithSound(battEl, "100%", 80), 2000);
+    }
+
+    function typewriterWithSound(el, text, speed = 50) {
+        el.textContent = "";
+        let i = 0;
+        function nextChar() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                playSound('typeKey');
+                i++;
+                setTimeout(nextChar, speed);
+            }
+        }
+        nextChar();
+    }
+</script>
+</body>
+
+</html>
