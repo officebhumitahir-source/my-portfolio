@@ -666,7 +666,7 @@
             </main>
 
             <!-- Right Column: Runtime OS Dashboard (4 Columns) -->
-            <aside class="lg:col-span-4 p-6 sm:p-10 flex flex-col justify-between space-y-6 bg-transparent">
+            <aside class="lg:col-span-4 p-6 sm:p-10 flex flex-col justify-start space-y-6 bg-transparent">
                 
                 <!-- Terminal / Runtime Environment Log Card -->
                 <div class="bg-[#18181B] text-[#F4F4F5] border-3 border-[#18181B] rounded-2xl p-6 sm:p-7 pop-shadow-lg flex flex-col justify-between space-y-6">
@@ -737,6 +737,80 @@
                             Data must tell a precise story.<br>
                             Function over Friction."
                         </p>
+                    </div>
+                </div>
+
+                <!-- Quick Connect & Social Hub Card -->
+                <div class="bg-white border-3 border-[#18181B] rounded-2xl p-6 sm:p-7 pop-shadow-lg flex flex-col space-y-5 relative overflow-hidden">
+                    <!-- Top Header -->
+                    <div>
+                        <div class="flex justify-between items-center pb-3 border-b-2 border-[#18181B]">
+                            <span class="font-display font-black text-lg text-[#18181B] flex items-center gap-2">
+                                <span>⚡</span> SOCIAL &amp; DIRECT HUB
+                            </span>
+                            <span class="text-[10px] font-mono font-bold uppercase bg-[#BBF7D0] text-[#14532D] border border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-ping"></span>
+                                ACTIVE NOW
+                            </span>
+                        </div>
+                        <p class="text-xs font-mono text-[#52525B] mt-2">
+                            Direct channels for software engineering roles, mobile telemetry, &amp; collaboration.
+                        </p>
+                    </div>
+
+                    <!-- 3D Tactile Action Buttons List -->
+                    <div class="space-y-3 font-display">
+                        <!-- Direct Email / Contact Modal Trigger -->
+                        <button onclick="openContactModal()" class="btn-3d w-full py-3 px-4 bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between cursor-pointer">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-base">✉</span>
+                                <span>Direct Email / Compose</span>
+                            </span>
+                            <span class="font-mono text-[11px] bg-white/80 px-2 py-0.5 rounded border border-[#18181B]">POPUP ↗</span>
+                        </button>
+
+                        <!-- GitHub Profile -->
+                        <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer" class="btn-3d w-full py-3 px-4 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between">
+                            <span class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                <span>GitHub Repository</span>
+                            </span>
+                            <span class="font-mono text-[11px] bg-white/80 px-2 py-0.5 rounded border border-[#18181B]">@officebhumitahir ↗</span>
+                        </a>
+
+                        <!-- LinkedIn Profile -->
+                        <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="btn-3d w-full py-3 px-4 bg-[#E9D5FF] hover:bg-[#D8B4FE] text-[#581C87] rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between">
+                            <span class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                <span>LinkedIn Network</span>
+                            </span>
+                            <span class="font-mono text-[11px] bg-white/80 px-2 py-0.5 rounded border border-[#18181B]">CONNECT ↗</span>
+                        </a>
+
+                        <!-- Copy Email Button -->
+                        <button onclick="copyEmailToClipboard()" class="btn-3d w-full py-3 px-4 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-between cursor-pointer">
+                            <span class="flex items-center gap-2.5">
+                                <span class="text-base">📋</span>
+                                <span>Copy Email Address</span>
+                            </span>
+                            <span class="font-mono text-[11px] bg-white/80 px-2 py-0.5 rounded border border-[#18181B]">1-CLICK</span>
+                        </button>
+                    </div>
+
+                    <!-- Availability & Metrics Strip -->
+                    <div class="pt-3 border-t-2 border-[#18181B]/15 space-y-2 font-mono text-xs">
+                        <div class="flex justify-between items-center text-[#52525B]">
+                            <span>Avg Response Time:</span>
+                            <span class="font-bold text-[#10B981]">&lt; 12 Hours</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[#52525B]">
+                            <span>Location:</span>
+                            <span class="font-bold text-[#18181B]">Surat, Gujarat, IN</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[#52525B]">
+                            <span>Timezone:</span>
+                            <span class="font-bold text-[#18181B]">IST (UTC +5:30)</span>
+                        </div>
                     </div>
                 </div>
 
