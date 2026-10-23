@@ -37,7 +37,7 @@
         }
     </script>
 
-    <!-- Custom Neo-Brutalist 3D Pop Styles -->
+    <!-- Custom Portfolio Styles -->
     <style>
         :root {
             --pop-black: #18181B;
@@ -54,7 +54,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Neo-Brutalist 3D Pop Shadow Utilities */
+        /* Shadow Utilities */
         .pop-shadow {
             box-shadow: 6px 6px 0px var(--pop-black);
         }
@@ -275,7 +275,7 @@
     <!-- Main Container (Elevated Above Spheres) -->
     <div class="relative z-10 w-full min-h-screen flex flex-col">
 
-        <!-- Top Status Bar (Neo-Brutalist Pill Ribbon) -->
+        <!-- Top Status Bar -->
         <header class="w-full border-b-3 border-[#18181B] bg-[#FFFFFF]/90 backdrop-blur-md px-6 sm:px-12 py-3 sticky top-0 z-50 flex flex-wrap justify-between items-center gap-3 text-xs font-mono font-bold">
             <div class="flex items-center gap-3">
                 <span class="w-3 h-3 rounded-full bg-[#10B981] inline-block animate-ping"></span>
@@ -283,19 +283,22 @@
                 <div id="clock" class="text-sm tracking-wider font-display font-bold"></div>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
                 <div class="hidden md:flex items-center gap-3 text-[11px] opacity-75">
                     <span id="mon-vel" class="bg-[#FEF08A] px-2 py-0.5 border border-[#18181B] rounded">VEL: 0px/s</span>
                     <span id="mon-scr" class="bg-[#BAE6FD] px-2 py-0.5 border border-[#18181B] rounded">SCR: 0%</span>
                     <span id="mon-tme" class="bg-[#E9D5FF] px-2 py-0.5 border border-[#18181B] rounded">TME: 00:00</span>
                 </div>
+                <button onclick="openContactModal()" class="px-3 py-1 bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] border-2 border-[#18181B] rounded-full font-bold pop-shadow-sm transition-all cursor-pointer">
+                    ✉ GET IN TOUCH
+                </button>
                 <div class="flex items-center gap-1.5 px-2.5 py-1 bg-[#18181B] text-[#FEF08A] rounded-full border border-[#18181B]">
                     <span>⚡ SURAT, IN</span>
                 </div>
             </div>
         </header>
 
-        <!-- Hero Section: Chic Neo-Brutalist Header -->
+        <!-- Hero Section -->
         <section class="w-full px-6 sm:px-12 lg:px-16 py-10 sm:py-16 border-b-3 border-[#18181B] bg-gradient-to-b from-[#FFFFFF]/70 to-[#FAF8F5]/80">
             <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-14">
                 
@@ -340,13 +343,13 @@
 
                     <!-- Tactile 3D Action Buttons -->
                     <div class="pt-2 flex flex-wrap gap-3.5 justify-center lg:justify-start">
-                        <a href="mailto:office.bhumitahir@gmail.com" class="btn-3d px-5 py-2.5 bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] rounded-xl text-sm">
-                            <span>✉</span> <span>MAIL: office.bhumitahir@gmail.com</span>
-                        </a>
-                        <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] rounded-xl text-sm">
+                        <button onclick="openContactModal()" class="btn-3d px-6 py-2.5 bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] rounded-xl text-sm font-bold flex items-center gap-2 cursor-pointer">
+                            <span>✉</span> <span>GET IN TOUCH</span>
+                        </button>
+                        <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] rounded-xl text-sm font-bold flex items-center gap-1.5 cursor-pointer">
                             <span>📋</span> <span>COPY EMAIL</span>
                         </button>
-                        <a href="#projects-archive" class="btn-3d px-5 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] rounded-xl text-sm">
+                        <a href="#projects-archive" class="btn-3d px-5 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] rounded-xl text-sm font-bold flex items-center gap-1.5">
                             <span>📂</span> <span>VIEW ARCHIVE (06)</span>
                         </a>
                     </div>
@@ -355,7 +358,7 @@
             </div>
         </section>
 
-        <!-- Infinite Neo-Brutalist Marquee Tape -->
+        <!-- Marquee Ticker Tape -->
         <div class="w-full bg-[#FEF08A] border-b-3 border-[#18181B] py-3 overflow-hidden select-none relative z-20 pop-shadow-sm">
             <div class="marquee-inner font-display font-bold text-xs sm:text-sm uppercase tracking-wider text-[#18181B]">
                 <div class="flex items-center gap-6 shrink-0">
@@ -698,16 +701,16 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-3">
-                    <a href="mailto:office.bhumitahir@gmail.com" class="btn-3d px-4 py-2.5 bg-[#BBF7D0] hover:bg-[#86EFAC] text-[#14532D] text-xs rounded-xl">
-                        ✉ office.bhumitahir@gmail.com
-                    </a>
-                    <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] text-xs rounded-xl">
+                    <button onclick="openContactModal()" class="btn-3d px-4 py-2.5 bg-[#BBF7D0] hover:bg-[#86EFAC] text-[#14532D] text-xs font-bold rounded-xl cursor-pointer">
+                        ✉ GET IN TOUCH
+                    </button>
+                    <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] text-xs font-bold rounded-xl cursor-pointer">
                         📋 Copy Email
                     </button>
-                    <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] text-xs rounded-xl">
+                    <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] text-xs font-bold rounded-xl">
                         GitHub ↗
                     </a>
-                    <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#E9D5FF] hover:bg-[#D8B4FE] text-[#581C87] text-xs rounded-xl">
+                    <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#E9D5FF] hover:bg-[#D8B4FE] text-[#581C87] text-xs font-bold rounded-xl">
                         LinkedIn ↗
                     </a>
                 </div>
@@ -723,6 +726,35 @@
 
     <!-- Retro Toast Feedback -->
     <div id="copy-toast">COPIED TO CLIPBOARD: office.bhumitahir@gmail.com</div>
+
+    <!-- Interactive Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 bg-[#18181B]/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative border-3 border-[#18181B] pop-shadow-lg transform scale-95 transition-transform duration-200" id="contact-modal-box">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 w-9 h-9 rounded-xl border-2 border-[#18181B] bg-slate-100 flex items-center justify-center font-bold text-lg hover:bg-rose-100 transition-colors cursor-pointer">
+                ✕
+            </button>
+            <div class="flex items-center gap-2 mb-2">
+                <span class="w-3 h-3 rounded-full bg-[#10B981] animate-ping"></span>
+                <span class="font-mono text-xs font-black uppercase text-emerald-800">CONNECT WITH BHUMIT</span>
+            </div>
+            <h3 class="font-display font-black text-2xl text-[#18181B] mb-2">Get in Touch</h3>
+            <p class="text-xs sm:text-sm text-[#52525B] mb-6 font-medium">
+                Open for data science, mobile analytics, and full-stack software development roles.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=office.bhumitahir@gmail.com&su=Inquiry%20from%20Portfolio" target="_blank" rel="noopener noreferrer" class="btn-3d w-full bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] py-3 uppercase tracking-wider rounded-xl font-bold flex items-center justify-center gap-2">
+                    <span>🌐</span> Open in Gmail (Web)
+                </a>
+                <a href="mailto:office.bhumitahir@gmail.com?subject=Inquiry%20from%20Portfolio" class="btn-3d w-full bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] py-3 uppercase tracking-wider rounded-xl font-bold flex items-center justify-center gap-2">
+                    <span>💻</span> Open in Default Mail App
+                </a>
+                <button onclick="copyEmailFromModal()" class="btn-3d w-full bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] py-3 uppercase tracking-wider rounded-xl font-bold flex items-center justify-center gap-2 cursor-pointer">
+                    <span id="copy-modal-icon">📋</span> <span id="copy-modal-text">Copy: office.bhumitahir@gmail.com</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Interactive Scripts: 3D Tilt Engine, Ambient Spheres Parallax, Clock, Sound -->
     <script>
@@ -882,7 +914,46 @@
             });
         }
 
-        // --- EMAIL CLIPBOARD & TOAST ---
+        // --- EMAIL CLIPBOARD, TOAST & CONTACT MODAL ---
+        function openContactModal() {
+            playSound('click');
+            const modal = document.getElementById('contact-modal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                const box = document.getElementById('contact-modal-box');
+                if (box) box.classList.remove('scale-95');
+            }, 10);
+            navigator.clipboard.writeText("office.bhumitahir@gmail.com").catch(() => {});
+            showToast("COPIED EMAIL: office.bhumitahir@gmail.com");
+        }
+
+        function closeContactModal() {
+            playSound('click');
+            const modal = document.getElementById('contact-modal');
+            if (!modal) return;
+            modal.classList.add('opacity-0');
+            const box = document.getElementById('contact-modal-box');
+            if (box) box.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 200);
+        }
+
+        function copyEmailFromModal() {
+            playSound('click');
+            navigator.clipboard.writeText("office.bhumitahir@gmail.com").then(() => {
+                const text = document.getElementById('copy-modal-text');
+                const icon = document.getElementById('copy-modal-icon');
+                if (text) text.textContent = "COPIED TO CLIPBOARD!";
+                if (icon) icon.textContent = "✅";
+                showToast("COPIED EMAIL: office.bhumitahir@gmail.com");
+                setTimeout(() => {
+                    if (text) text.textContent = "Copy: office.bhumitahir@gmail.com";
+                    if (icon) icon.textContent = "📋";
+                }, 2000);
+            });
+        }
+
         function copyEmailToClipboard() {
             const email = "office.bhumitahir@gmail.com";
             navigator.clipboard.writeText(email).then(() => {
