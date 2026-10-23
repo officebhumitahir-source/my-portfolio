@@ -1,1040 +1,850 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-auto cursor-default">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhumit Ahir | v2.0</title>
+    <title>Bhumit Ahir | Mobile App Data Analyst & Full-Stack Developer</title>
 
-    <!-- Fonts -->
+    <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+Pro:wght@400;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'kindle-bg': '#F5F5F5',
-                        'kindle-ink': '#1A1A1A',
+                        'pop-cream': '#FAF8F5',
+                        'pop-dark': '#18181B',
+                        'pop-yellow': '#FEF08A',
+                        'pop-lime': '#BBF7D0',
+                        'pop-cyan': '#BAE6FD',
+                        'pop-purple': '#E9D5FF',
+                        'pop-pink': '#FBCFE8',
+                        'pop-peach': '#FED7AA'
                     },
                     fontFamily: {
-                        serif: ['"Source Serif Pro"', '"Playfair Display"', 'serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    cursor: {
-                        'default': 'url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M0 0l6 18 3-7 8 2-17-13z"/></svg>), auto',
-                        'pointer': 'url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M10 2l-1 5h-4l-3 15h16l2-12h-5l1-8z"/></svg>), pointer',
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom CSS & SVG Filters -->
+    <!-- Custom Neo-Brutalist 3D Pop Styles -->
     <style>
+        :root {
+            --pop-black: #18181B;
+            --pop-cream: #FAF8F5;
+        }
+
         body {
-            background-color: #F5F5F5;
-            color: #1A1A1A;
+            background-color: var(--pop-cream);
+            background-image: radial-gradient(#18181B 0.9px, transparent 0.9px);
+            background-size: 24px 24px;
+            color: var(--pop-black);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Border Utility */
-        .ink-border {
-            border: 2px solid #1A1A1A;
+        /* Neo-Brutalist 3D Pop Shadow Utilities */
+        .pop-shadow {
+            box-shadow: 6px 6px 0px var(--pop-black);
         }
 
+        .pop-shadow-lg {
+            box-shadow: 9px 9px 0px var(--pop-black);
+        }
 
+        .pop-shadow-sm {
+            box-shadow: 4px 4px 0px var(--pop-black);
+        }
 
-        /* Toast Feedback */
-        #copy-toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1A1A1A;
-            color: #22C55E;
-            border: 2px solid #22C55E;
-            padding: 10px 18px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 100001;
-            opacity: 0;
-            transform: translateY(-10px);
+        /* 3D Interactive Buttons */
+        .btn-3d {
+            border: 2.5px solid var(--pop-black);
+            box-shadow: 4px 4px 0px var(--pop-black);
+            transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-3d:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--pop-black);
+        }
+
+        .btn-3d:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px var(--pop-black);
+        }
+
+        /* 3D Tilt Card Base */
+        .card-3d-wrap {
+            perspective: 1200px;
+        }
+
+        .card-3d {
+            position: relative;
+            border: 3px solid var(--pop-black);
+            border-radius: 20px;
+            box-shadow: 7px 7px 0px var(--pop-black);
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .card-3d:hover {
+            box-shadow: 13px 13px 0px var(--pop-black);
+        }
+
+        .card-3d:active {
+            transform: translate(4px, 4px) !important;
+            box-shadow: 2px 2px 0px var(--pop-black) !important;
+        }
+
+        /* Glossy Specular Sheen Overlay */
+        .tilt-sheen {
+            position: absolute;
+            inset: 0;
             pointer-events: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.65) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            mix-blend-mode: overlay;
+            z-index: 20;
         }
 
-        #copy-toast.show {
+        .card-3d:hover .tilt-sheen {
             opacity: 1;
-            transform: translateY(0);
         }
 
-        /* Dither Filter Class */
-        .dither-img {
-            filter: grayscale(100%) contrast(150%) url(#dither-filter);
-        }
-
-        /* Flash Animation Overlay */
-        #flash-overlay {
+        /* Floating 3D Spheres */
+        .sphere-layer {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            inset: 0;
             pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            display: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .flash-anim {
-            display: block !important;
-            animation: flashCycle 0.6s steps(2, end) forwards;
+        .ambient-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.55;
+            mix-blend-mode: multiply;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        @keyframes flashCycle {
-            0% {
-                background: #1A1A1A;
-                opacity: 1;
-            }
-
-            50% {
-                background: #F5F5F5;
-                opacity: 1;
-            }
-
-            100% {
-                background: transparent;
-                opacity: 0;
-            }
+        .sphere-lime {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle at 35% 35%, #86EFAC, #10B981 60%, #047857);
+            top: -60px;
+            left: -80px;
+            animation: float1 14s ease-in-out infinite alternate;
         }
 
-        /* Selection */
-        ::selection {
-            background: #1A1A1A;
-            color: #F5F5F5;
+        .sphere-purple {
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle at 35% 35%, #E9D5FF, #A855F7 60%, #6B21A8);
+            top: 35%;
+            right: -120px;
+            animation: float2 18s ease-in-out infinite alternate;
         }
 
-        /* Checkbox styling */
-        input[type="checkbox"] {
-            appearance: none;
-            width: 1.25em;
-            height: 1.25em;
-            border: 2px solid #1A1A1A;
-            display: inline-grid;
-            place-content: center;
+        .sphere-coral {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle at 35% 35%, #FED7AA, #FB923C 60%, #EA580C);
+            bottom: 5%;
+            left: 5%;
+            animation: float3 16s ease-in-out infinite alternate;
         }
 
-        input[type="checkbox"]::before {
-            content: "";
-            width: 0.65em;
-            height: 0.65em;
-            transform: scale(0);
-            transition: 120ms transform ease-in-out;
-            box-shadow: inset 1em 1em #1A1A1A;
+        .sphere-cyan {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at 35% 35%, #BAE6FD, #38BDF8 60%, #0284C7);
+            top: 65%;
+            right: 25%;
+            animation: float4 20s ease-in-out infinite alternate;
         }
 
-        input[type="checkbox"]:checked::before {
-            transform: scale(1);
+        .sphere-yellow {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle at 35% 35%, #FEF08A, #FACC15 60%, #CA8A04);
+            top: 15%;
+            left: 50%;
+            animation: float5 13s ease-in-out infinite alternate;
         }
 
-        /* Terminal Cursor Blink */
-        .cursor-blink {
-            animation: blink 1s step-end infinite;
+        @keyframes float1 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(70px, 90px) scale(1.1); } }
+        @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-80px, -60px) scale(0.92); } }
+        @keyframes float3 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(90px, -70px) scale(1.08); } }
+        @keyframes float4 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-60px, 80px) scale(0.95); } }
+        @keyframes float5 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, -60px) scale(1.12); } }
+
+        /* Infinite Marquee Tape Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
+        .marquee-inner {
+            display: flex;
+            width: 200%;
+            animation: marquee 22s linear infinite;
         }
 
-        /* Hacker Text Selection */
-        ::selection {
-            background: #22C55E;
-            /* Tailwind green-500 */
-            color: #000000;
+        .marquee-inner:hover {
+            animation-play-state: paused;
         }
 
         /* Typewriter Cursor */
         .typewriter-cursor::after {
             content: '█';
-            color: #22C55E;
+            color: #10B981;
             animation: blink 1s step-end infinite;
-            margin-left: 2px;
+            margin-left: 4px;
         }
 
-        /* Coder Hover Effect (Invert & Transition) */
-        .coder-hover {
-            transition: all 0.1s step-end;
-            /* "Digital" feel */
-            position: relative;
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        .coder-hover:hover {
-            background-color: #1A1A1A !important;
-            color: #FFFFFF !important;
-            text-shadow: 2px 2px 0px #22C55E;
-            /* Hard Green Shadow */
-            border-color: #22C55E !important;
-            box-shadow: -4px 4px 0px rgba(34, 197, 94, 0.3);
-            transform: translate(2px, -2px);
-        }
-
-        /* Force children to inherit white+shadow on hover */
-        .coder-hover:hover * {
-            color: #FFFFFF !important;
-            text-shadow: 2px 2px 0px #22C55E;
-            border-color: #22C55E !important;
-        }
-
-        /* HACK MODE STYLES */
-        body.hack-mode {
-            background-color: #000000 !important;
-            color: #00FF00 !important;
-        }
-
-        body.hack-mode * {
-            border-color: #00FF00 !important;
-            color: #00FF00 !important;
-        }
-
-        body.hack-mode .dither-img {
-            filter: grayscale(100%) contrast(200%) brightness(1.2) drop-shadow(0 0 5px #00FF00);
-        }
-
-        body.hack-mode ::selection {
-            background: #00FF00;
-            color: #000000;
-        }
-
-        /* DEBUG MODE STYLES */
-        body.debug-mode * {
-            outline: 1px solid red !important;
-        }
-
-        /* BOOT OVERLAY */
-        #boot-overlay {
+        /* Retro Toast */
+        #copy-toast {
             position: fixed;
-            inset: 0;
-            background: #000000;
-            z-index: 100000;
-            /* Above everything */
-            display: none;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-            color: #22C55E;
-            font-size: 14px;
+            top: 24px;
+            right: 24px;
+            background: #18181B;
+            color: #FACC15;
+            border: 3px solid #FACC15;
+            box-shadow: 5px 5px 0px #18181B;
+            padding: 12px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 12px;
+            z-index: 100001;
+            opacity: 0;
+            transform: translateY(-15px) scale(0.95);
+            pointer-events: none;
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
+        #copy-toast.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        ::selection {
+            background: #FACC15;
+            color: #18181B;
+        }
     </style>
 </head>
 
-<body class="min-h-screen font-serif relative w-full bg-[#F5F5F5] text-[#1A1A1A] m-0 p-0 overflow-x-hidden"
-    id="main-body">
-<script>
-    // Critical Path: Instant Transition Check (Anti-Flash)
-    if (sessionStorage.getItem('portfolio_entered') === 'true') {
-        document.write('<style>#entry-screen { display: none !important; } #site-content { display: block !important; opacity: 1 !important; }</style>');
-    }
-</script>
+<body class="min-h-screen relative w-full m-0 p-0 text-[#18181B]">
 
-<!-- Click-to-Enter Overlay -->
-<div id="entry-screen"
-    class="fixed inset-0 bg-[#F5F5F5] z-[99999] flex flex-col items-center justify-center cursor-pointer select-none">
-    <div class="group flex flex-col items-center gap-4 transition-transform duration-300 hover:scale-105">
-        <!-- File Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-16 h-16 text-[#1A1A1A] fill-[#1A1A1A]/5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-        </svg>
-        <!-- Text -->
-        <div
-            class="font-mono text-sm uppercase tracking-widest text-[#1A1A1A] group-hover:underline decoration-2 underline-offset-4">
-            Click to Open Portfolio
-        </div>
-    </div>
-</div>
-
-<!-- Boot Sequence Overlay -->
-<div id="boot-overlay">
-    <div id="boot-log"></div>
-</div>
-
-<!-- Screen Flash Overlay -->
-<div id="flash-overlay"></div>
-
-<!-- SVG Filter Definition for Dithering -->
-<svg class="hidden">
-    <defs>
-        <filter id="dither-filter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
-            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" in="noise"
-                result="coloredNoise" />
-            <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
-            <feBlend mode="overlay" in="composite" in2="SourceGraphic" />
-        </filter>
-    </defs>
-</svg>
-
-<!-- Top Status Bar (V1 Style) -->
-<div id="site-content" style="display:none; opacity: 0;" class="transition-opacity duration-1000 w-full min-h-screen">
-    <!-- Top Status Bar (V1 Style) -->
-    <div
-        class="border-b-2 border-[#1A1A1A] px-4 sm:px-8 lg:px-12 py-2.5 flex flex-wrap justify-between items-center text-xs uppercase tracking-widest bg-[#F5F5F5] sticky top-0 z-50 font-mono gap-2 w-full">
-        <div class="flex items-center gap-3">
-            <div id="clock"></div>
-        </div>
-        <div class="flex items-center gap-4">
-            <!-- System Monitor Widget -->
-            <div class="hidden md:flex gap-4 opacity-50">
-                <span id="mon-vel">VEL: 0px/s</span>
-                <span id="mon-scr">SCR: 0%</span>
-                <span id="mon-tme">TME: 00:00</span>
-            </div>
-
-            <div class="h-4 w-[2px] bg-[#1A1A1A] mx-2 hidden md:block"></div>
-
-            <span id="status-conn"></span>
-            <div class="flex items-center gap-1">
-                <span id="status-batt"></span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                    stroke="currentColor" class="w-4 h-4 text-[#1A1A1A]">
-                    <path stroke-linecap="square" stroke-linejoin="miter"
-                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                </svg>
-            </div>
-        </div>
+    <!-- Ambient Floating 3D Spheres Layer -->
+    <div class="sphere-layer" id="ambient-sphere-layer">
+        <div class="ambient-sphere sphere-lime"></div>
+        <div class="ambient-sphere sphere-purple"></div>
+        <div class="ambient-sphere sphere-coral"></div>
+        <div class="ambient-sphere sphere-cyan"></div>
+        <div class="ambient-sphere sphere-yellow"></div>
     </div>
 
-    <!-- Main Header (Full Page Responsive) -->
-    <header class="w-full px-6 sm:px-12 lg:px-16 py-8 sm:py-12 border-b-2 border-[#1A1A1A] flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12 bg-[#F5F5F5]">
-        <!-- Profile Image -->
-        <div class="w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-[#1A1A1A] shrink-0 relative shadow-sm">
-            <img src="profile_v3.jpg" alt="Bhumit Ahir" class="w-full h-full object-cover dither-img scale-110">
-            <!-- Overlay for extra grain texture -->
-            <div
-                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none mix-blend-multiply">
+    <!-- Main Container (Elevated Above Spheres) -->
+    <div class="relative z-10 w-full min-h-screen flex flex-col">
+
+        <!-- Top Status Bar (Neo-Brutalist Pill Ribbon) -->
+        <header class="w-full border-b-3 border-[#18181B] bg-[#FFFFFF]/90 backdrop-blur-md px-6 sm:px-12 py-3 sticky top-0 z-50 flex flex-wrap justify-between items-center gap-3 text-xs font-mono font-bold">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-[#10B981] inline-block animate-ping"></span>
+                <span class="px-2.5 py-1 bg-[#BBF7D0] text-[#14532D] border-2 border-[#18181B] rounded-full">SYSTEM: ONLINE</span>
+                <div id="clock" class="text-sm tracking-wider font-display font-bold"></div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-3 text-[11px] opacity-75">
+                    <span id="mon-vel" class="bg-[#FEF08A] px-2 py-0.5 border border-[#18181B] rounded">VEL: 0px/s</span>
+                    <span id="mon-scr" class="bg-[#BAE6FD] px-2 py-0.5 border border-[#18181B] rounded">SCR: 0%</span>
+                    <span id="mon-tme" class="bg-[#E9D5FF] px-2 py-0.5 border border-[#18181B] rounded">TME: 00:00</span>
+                </div>
+                <div class="flex items-center gap-1.5 px-2.5 py-1 bg-[#18181B] text-[#FEF08A] rounded-full border border-[#18181B]">
+                    <span>⚡ SURAT, IN</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section: Chic Neo-Brutalist Header -->
+        <section class="w-full px-6 sm:px-12 lg:px-16 py-10 sm:py-16 border-b-3 border-[#18181B] bg-gradient-to-b from-[#FFFFFF]/70 to-[#FAF8F5]/80">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-14">
+                
+                <!-- Profile Avatar in 3D Isometric Frame -->
+                <div class="relative shrink-0 group">
+                    <div class="w-36 h-36 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-3 border-[#18181B] pop-shadow bg-[#FEF08A] relative transform transition-transform duration-300 group-hover:rotate-2 group-hover:scale-105">
+                        <img src="profile_v3.jpg" alt="Bhumit Ahir" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Floating Pop Badge -->
+                    <div class="absolute -bottom-3 -right-3 bg-[#BBF7D0] text-[#14532D] border-2 border-[#18181B] pop-shadow-sm font-display text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        ✦ OPEN TO WORK
+                    </div>
+                </div>
+
+                <!-- Hero Copy & Badges -->
+                <div class="flex-grow text-center lg:text-left space-y-4">
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                        <span class="px-3 py-1 bg-[#FED7AA] text-[#7C2D12] border-2 border-[#18181B] rounded-full font-mono text-xs font-bold pop-shadow-sm">
+                            DATA SCIENCE &amp; APPS
+                        </span>
+                        <span class="px-3 py-1 bg-[#E9D5FF] text-[#581C87] border-2 border-[#18181B] rounded-full font-mono text-xs font-bold pop-shadow-sm">
+                            INTERN @ LOGICGO INFOTECH
+                        </span>
+                        <span class="px-3 py-1 bg-[#FEF08A] text-[#713F12] border-2 border-[#18181B] rounded-full font-mono text-xs font-bold pop-shadow-sm">
+                            B.TECH CSE (DS)
+                        </span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight text-[#18181B] leading-none">
+                        Bhumit Ahir<span class="text-[#10B981] inline-block animate-bounce">!</span>
+                    </h1>
+
+                    <!-- Dynamic Typewriter Banner -->
+                    <div class="p-3 bg-[#18181B] text-[#F4F4F5] border-2 border-[#18181B] pop-shadow-sm rounded-xl font-mono text-xs sm:text-sm font-bold tracking-wide inline-block max-w-full">
+                        <span class="text-[#FEF08A]">ROLE //</span> <span class="typewriter-target"></span>
+                    </div>
+
+                    <p class="text-base sm:text-lg leading-relaxed text-[#27272A] max-w-3xl font-medium">
+                        I engineer robust digital ecosystems with high-performance telemetry and zero-bloat architecture. My core philosophy is <span class="bg-[#FEF08A] px-2 py-0.5 border border-[#18181B] font-bold rounded">'Function over Friction.'</span> 
+                        Currently conducting deep mobile application retention analytics at <strong class="underline decoration-wavy decoration-[#10B981]">Logicgo Infotech</strong>, and building local-first solutions like <strong class="text-[#7C2D12]">NEXHR</strong>, <strong class="text-[#9D174D]">TabFlow</strong>, and <strong class="text-[#065F46]">Bodh</strong>.
+                    </p>
+
+                    <!-- Tactile 3D Action Buttons -->
+                    <div class="pt-2 flex flex-wrap gap-3.5 justify-center lg:justify-start">
+                        <a href="mailto:office.bhumitahir@gmail.com" class="btn-3d px-5 py-2.5 bg-[#A7F3D0] hover:bg-[#6EE7B7] text-[#064E3B] rounded-xl text-sm">
+                            <span>✉</span> <span>MAIL: office.bhumitahir@gmail.com</span>
+                        </a>
+                        <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] rounded-xl text-sm">
+                            <span>📋</span> <span>COPY EMAIL</span>
+                        </button>
+                        <a href="#projects-archive" class="btn-3d px-5 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] rounded-xl text-sm">
+                            <span>📂</span> <span>VIEW ARCHIVE (06)</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Infinite Neo-Brutalist Marquee Tape -->
+        <div class="w-full bg-[#FEF08A] border-b-3 border-[#18181B] py-3 overflow-hidden select-none relative z-20 pop-shadow-sm">
+            <div class="marquee-inner font-display font-bold text-xs sm:text-sm uppercase tracking-wider text-[#18181B]">
+                <div class="flex items-center gap-6 shrink-0">
+                    <span>⚡ BHUMIT AHIR</span> <span>✦</span>
+                    <span>MOBILE APP DATA ANALYST INTERN @ LOGICGO INFOTECH</span> <span>✦</span>
+                    <span>B.TECH CSE (DATA SCIENCE)</span> <span>✦</span>
+                    <span>FUNCTION OVER FRICTION</span> <span>✦</span>
+                    <span>100% LOCAL-FIRST ARCHITECTURES</span> <span>✦</span>
+                    <span>NEXHR WORKFORCE OS</span> <span>✦</span>
+                    <span>BODH DIGITAL WELLBEING</span> <span>✦</span>
+                    <span>TABFLOW CHROME EXTENSION</span> <span>✦</span>
+                </div>
+                <div class="flex items-center gap-6 shrink-0">
+                    <span>⚡ BHUMIT AHIR</span> <span>✦</span>
+                    <span>MOBILE APP DATA ANALYST INTERN @ LOGICGO INFOTECH</span> <span>✦</span>
+                    <span>B.TECH CSE (DATA SCIENCE)</span> <span>✦</span>
+                    <span>FUNCTION OVER FRICTION</span> <span>✦</span>
+                    <span>100% LOCAL-FIRST ARCHITECTURES</span> <span>✦</span>
+                    <span>NEXHR WORKFORCE OS</span> <span>✦</span>
+                    <span>BODH DIGITAL WELLBEING</span> <span>✦</span>
+                    <span>TABFLOW CHROME EXTENSION</span> <span>✦</span>
+                </div>
             </div>
         </div>
 
-        <!-- Header Content -->
-        <div class="text-center md:text-left flex-grow">
-            <!-- Added blinking cursor to title -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-2 font-serif">Bhumit Ahir<span
-                    class="text-green-600 animate-pulse">_</span></h1>
-            <div
-                class="typewriter-target font-mono text-xs md:text-sm font-bold border-y-2 border-[#1A1A1A] py-2 inline-block md:block uppercase tracking-wide min-h-[36px] md:min-h-[24px]">
-                Full-Stack Developer | Mobile App Data Analyst Intern @ Logicgo Infotech | B.Tech CSE (Data Science)
-            </div>
+        <!-- Main Content Grid (12 Columns: 8 Archive + 4 Runtime OS) -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-12 flex-grow relative z-10" id="projects-archive">
 
-            <div class="mt-4 text-base md:text-lg leading-relaxed font-serif max-w-3xl">
-                <p>I am a B.Tech CSE (Data Science) student and <span class="font-bold border-b-2 border-[#1A1A1A]">Mobile App Data Analyst Intern at Logicgo Infotech</span>, focused on building clean, high-performance digital systems and deriving actionable product telemetry. My philosophy is <span
-                        class="italic font-bold bg-[#1A1A1A] text-[#F5F5F5] px-1">'Function over Friction.'</span>
-                </p>
-                <p class="mt-2 text-sm md:text-base">
-                    Beyond code, I apply engineering to real-world ecosystems: analyzing user retention and telemetry, engineering local-first tools like <span class="font-bold border-b-2 border-[#1A1A1A]">TabFlow Extension</span>, and building 100% offline digital wellbeing systems like <span class="font-bold border-b-2 border-[#1A1A1A]">Bodh</span>.
-                </p>
-            </div>
+            <!-- Left Column: The Archive (8 Columns) -->
+            <main class="lg:col-span-8 border-r-0 lg:border-r-3 border-b-3 lg:border-b-0 border-[#18181B] p-6 sm:p-10 flex flex-col space-y-8 bg-transparent">
+                
+                <!-- Section Header & Filter Pills -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#FFFFFF] p-5 border-3 border-[#18181B] rounded-2xl pop-shadow">
+                    <div>
+                        <h2 class="font-display font-black text-xl sm:text-2xl text-[#18181B] flex items-center gap-2">
+                            <span>📂</span> THE ARCHIVE <span class="text-xs font-mono font-bold bg-[#FEF08A] px-2.5 py-0.5 border border-[#18181B] rounded-full">06 PROJECTS</span>
+                        </h2>
+                        <p class="text-xs font-mono text-[#52525B] mt-0.5">Explore full-stack, mobile systems, and local-first browser extensions.</p>
+                    </div>
 
-            <!-- Mail & Contact Quick Actions -->
-            <div class="mt-6 flex flex-wrap gap-2.5 justify-center md:justify-start font-mono text-xs">
-                <a href="mailto:office.bhumitahir@gmail.com"
-                    class="px-4 py-2 bg-[#1A1A1A] text-[#F5F5F5] border-2 border-[#1A1A1A] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none inline-flex items-center gap-1.5 shadow-sm">
-                    <span>✉</span> <span>MAIL: office.bhumitahir@gmail.com</span>
-                </a>
-                <button onclick="copyEmailToClipboard()"
-                    class="px-4 py-2 bg-[#F5F5F5] text-[#1A1A1A] border-2 border-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-none inline-flex items-center gap-1.5 cursor-pointer">
-                    <span>📋</span> <span>COPY EMAIL</span>
-                </button>
-                <a href="#projects-archive"
-                    class="px-4 py-2 bg-[#F5F5F5] text-[#1A1A1A] border-2 border-[#1A1A1A] font-bold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-none inline-flex items-center gap-1.5">
-                    <span>📂</span> <span>VIEW ARCHIVE (06)</span>
-                </a>
-            </div>
+                    <!-- 3D Filter Pills -->
+                    <div class="flex flex-wrap gap-2" id="project-filters">
+                        <button onclick="filterProjects('all', this)" class="filter-pill btn-3d px-3.5 py-1.5 text-xs bg-[#18181B] text-[#FEF08A]">ALL (6)</button>
+                        <button onclick="filterProjects('system', this)" class="filter-pill btn-3d px-3.5 py-1.5 text-xs bg-[#FFFFFF] text-[#18181B] hover:bg-[#FED7AA]">SYSTEMS</button>
+                        <button onclick="filterProjects('android', this)" class="filter-pill btn-3d px-3.5 py-1.5 text-xs bg-[#FFFFFF] text-[#18181B] hover:bg-[#BBF7D0]">ANDROID</button>
+                        <button onclick="filterProjects('extension', this)" class="filter-pill btn-3d px-3.5 py-1.5 text-xs bg-[#FFFFFF] text-[#18181B] hover:bg-[#FBCFE8]">EXTENSIONS</button>
+                    </div>
+                </div>
+
+                <!-- 3D Interactive Project Cards Grid (2-Column Tiles) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+
+                    <!-- Project 01: Minimalist Launcher (Mint / Lime Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="android">
+                        <a href="project_launcher.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#F0FDF4] to-[#DCFCE7] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#14532D] group-hover:underline">Project 01: Minimalist Launcher</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#86EFAC] text-[#14532D] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">ANDROID</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#166534] bg-[#DCFCE7] px-2.5 py-0.5 border border-[#16A34A] rounded-md inline-block mb-3.5">
+                                        [IN DEVELOPING STAGE]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        A distraction-free UI designed to break unconscious smartphone scrolling impulses and reduce dopamine addiction through intentional friction gates.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#16A34A]/20 flex justify-between items-center text-xs font-mono font-bold text-[#15803D]">
+                                    <span>KOTLIN • LAUNCHER OS</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 02: Wisdom Widget (Lilac / Purple Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="android">
+                        <a href="project_wisdom.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#581C87] group-hover:underline">Project 02: Wisdom Widget</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#D8B4FE] text-[#581C87] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">PLAY STORE</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B21A8] bg-[#F3E8FF] px-2.5 py-0.5 border border-[#9333EA] rounded-md inline-block mb-3.5">
+                                        [NOW ON PLAY STORE]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        A minimalist Android home screen widget delivering daily Sanskrit shloks and mindful quotes. Engineered with AlarmManager for near-zero battery overhead.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#9333EA]/20 flex justify-between items-center text-xs font-mono font-bold text-[#7E22CE]">
+                                    <span>APPWIDGET • ROOM DB</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 03: NEXHR Platform (Peach / Sunset Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="system">
+                        <a href="project_hrms.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#FFF7ED] to-[#FFEDD5] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#7C2D12] group-hover:underline">Project 03: NEXHR Platform</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#FDBA74] text-[#7C2D12] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">FULLSTACK</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#9A3412] bg-[#FFEDD5] px-2.5 py-0.5 border border-[#EA580C] rounded-md inline-block mb-3.5">
+                                        [IN DEVELOPING STAGE]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        AI-powered Workforce Intelligence and HRMS monorepo: live GPS-verified attendance clock, shift timeline metrics, RBAC permissions, and automated payroll reporting.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#EA580C]/20 flex justify-between items-center text-xs font-mono font-bold text-[#C2410C]">
+                                    <span>REACT • PRISMA • AI</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 04: Retail Billing System (Cyber Sky Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="system">
+                        <a href="project_billing.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#0C4A6E] group-hover:underline">Project 04: Retail Billing System</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#7DD3FC] text-[#0C4A6E] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">WEB / POS</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0369A1] bg-[#E0F2FE] px-2.5 py-0.5 border border-[#0284C7] rounded-md inline-block mb-3.5">
+                                        [DEVELOPED]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        A robust, keyboard-first billing and inventory checkout platform engineered for rapid cashier navigation, offline fallback storage, and automated invoice printing.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#0284C7]/20 flex justify-between items-center text-xs font-mono font-bold text-[#0284C7]">
+                                    <span>POS • INVENTORY</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 05: TabFlow Chrome Extension (Bubblegum Pink Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="extension">
+                        <a href="project_tabflow.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#FDF2F8] to-[#FCE7F3] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#831843] group-hover:underline">Project 05: TabFlow Extension</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#F472B6] text-[#831843] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">CHROME MV3</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#9D174D] bg-[#FCE7F3] px-2.5 py-0.5 border border-[#DB2777] rounded-md inline-block mb-3.5">
+                                        [DEVELOPED]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        A local-first, distraction-free Chrome workspace organizer built with Manifest V3, Side Panel API, and duplicate tab detection with zero external telemetry.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#DB2777]/20 flex justify-between items-center text-xs font-mono font-bold text-[#BE185D]">
+                                    <span>TYPESCRIPT • VITE</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 06: Bodh Digital Wellbeing (Sage Emerald Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="android">
+                        <a href="project_bodh.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#ECFDF5] to-[#D1FAE5] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#064E3B] group-hover:underline">Project 06: Bodh App</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#6EE7B7] text-[#064E3B] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">100% OFFLINE</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#065F46] bg-[#D1FAE5] px-2.5 py-0.5 border border-[#059669] rounded-md inline-block mb-3.5">
+                                        [DEVELOPED]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        A 100% offline mindful wellbeing app built with Jetpack Compose, UsageStatsManager, and deliberate breath-friction gates without requesting INTERNET permission.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#059669]/20 flex justify-between items-center text-xs font-mono font-bold text-[#047857]">
+                                    <span>KOTLIN • COMPOSE</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 07: The Stack (Obsidian Cyber with Neon Pop Shadow) -->
+                    <div class="card-3d-wrap project-item" data-category="all">
+                        <a href="stack.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-[#18181B] text-[#F4F4F5] p-7 flex flex-col justify-between border-3 border-[#18181B] hover:border-[#FACC15]" style="box-shadow: 7px 7px 0px #FACC15;">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#FACC15]">THE_STACK.JSON</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#FACC15] text-[#18181B] border-2 border-[#FFFFFF] px-2.5 py-0.5 rounded-full shrink-0">HARDWARE</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#4ADE80] bg-[#27272A] px-2.5 py-0.5 border border-[#4ADE80]/40 rounded-md inline-block mb-3.5">
+                                        [DIGITAL ARSENAL]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#D4D4D8] leading-relaxed">
+                                        Detailed breakdown of the physical machines, OS setups, and dev gear that power my daily analytics and coding throughput.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#3F3F46] flex justify-between items-center text-xs font-mono font-bold text-[#FACC15]">
+                                    <span>SETUP &amp; GEAR</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Project 08: Offline Mode (Lemon Sherbet Theme) -->
+                    <div class="card-3d-wrap project-item" data-category="all">
+                        <a href="offline.html" class="block h-full">
+                            <article class="card-3d tilt-card bg-gradient-to-br from-[#FEF9C3] to-[#FEF08A] p-7 flex flex-col justify-between">
+                                <div class="tilt-sheen"></div>
+                                <div>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <h3 class="font-display font-black text-xl text-[#713F12]">OFFLINE_MODE</h3>
+                                        <span class="text-[11px] font-mono font-bold bg-[#FDE047] text-[#713F12] border-2 border-[#18181B] px-2.5 py-0.5 rounded-full pop-shadow-sm shrink-0">PERSONAL</span>
+                                    </div>
+                                    <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#854D0E] bg-[#FEF08A] px-2.5 py-0.5 border border-[#CA8A04] rounded-md inline-block mb-3.5">
+                                        [MINDSET &amp; ATHLETICS]
+                                    </div>
+                                    <p class="text-sm font-medium text-[#1F2937] leading-relaxed">
+                                        Beyond the code. Athletics, reading, and the relentless discipline mindset inspired by Virat Kohli's work ethic and fast-learner philosophy.
+                                    </p>
+                                </div>
+                                <div class="mt-6 pt-4 border-t-2 border-[#CA8A04]/20 flex justify-between items-center text-xs font-mono font-bold text-[#854D0E]">
+                                    <span>DISCIPLINE OVER NOISE</span>
+                                    <span>EXPLORE ➔</span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                </div>
+            </main>
+
+            <!-- Right Column: Runtime OS Dashboard (4 Columns) -->
+            <aside class="lg:col-span-4 p-6 sm:p-10 flex flex-col justify-between space-y-6 bg-transparent">
+                
+                <!-- Terminal / Runtime Environment Log Card -->
+                <div class="bg-[#18181B] text-[#F4F4F5] border-3 border-[#18181B] rounded-2xl p-6 sm:p-7 pop-shadow-lg flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center pb-3 border-b-2 border-[#3F3F46]">
+                            <span class="font-display font-bold text-base text-[#FEF08A]">RUNTIME_ENVIRONMENT.LOG</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse"></span>
+                        </div>
+
+                        <!-- Current Role Highlight -->
+                        <div class="mt-5 p-3.5 bg-[#27272A] border-2 border-[#3F3F46] rounded-xl space-y-2">
+                            <div class="text-[10px] font-mono text-[#A1A1AA] uppercase tracking-wider">[CURRENT_POSITION]</div>
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-[#D4D4D8]">ROLE:</span>
+                                <span class="text-[#34D399] font-bold">DATA_ANALYST</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-[#D4D4D8]">ORG:</span>
+                                <span class="text-[#FBBF24] font-bold">Logicgo Infotech</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono">
+                                <span class="text-[#D4D4D8]">FOCUS:</span>
+                                <span class="text-[#38BDF8]">Mobile Telemetry</span>
+                            </div>
+                        </div>
+
+                        <!-- Core Variables & Gauges -->
+                        <div class="mt-5 space-y-3 font-mono text-xs">
+                            <div class="opacity-60 text-[10px] uppercase border-b border-[#3F3F46] pb-1">[SYSTEM_METRICS]</div>
+                            
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1">
+                                    <span class="text-[#D4D4D8]">LEARNING_RATE</span>
+                                    <span class="text-[#34D399] font-bold">0.99 (EXTREME)</span>
+                                </div>
+                                <div class="w-full bg-[#27272A] rounded-full h-2 overflow-hidden border border-[#3F3F46]">
+                                    <div class="bg-gradient-to-r from-[#10B981] to-[#34D399] h-full rounded-full" style="width: 98%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1">
+                                    <span class="text-[#D4D4D8]">ADAPTABILITY</span>
+                                    <span class="text-[#FBBF24] font-bold">[MAXIMUM]</span>
+                                </div>
+                                <div class="w-full bg-[#27272A] rounded-full h-2 overflow-hidden border border-[#3F3F46]">
+                                    <div class="bg-gradient-to-r from-[#F59E0B] to-[#FBBF24] h-full rounded-full" style="width: 95%;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1">
+                                    <span class="text-[#D4D4D8]">LOCAL_FIRST_PIPELINES</span>
+                                    <span class="text-[#38BDF8] font-bold">100% OFFLINE</span>
+                                </div>
+                                <div class="w-full bg-[#27272A] rounded-full h-2 overflow-hidden border border-[#3F3F46]">
+                                    <div class="bg-gradient-to-r from-[#0284C7] to-[#38BDF8] h-full rounded-full" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core Philosophy Card -->
+                    <div class="p-4 bg-[#27272A] border-l-4 border-[#10B981] rounded-r-xl">
+                        <div class="text-[10px] font-mono text-[#A1A1AA] uppercase tracking-wider mb-1">[CORE_PHILOSOPHY]</div>
+                        <p class="font-display italic text-xs leading-relaxed text-[#F4F4F5]">
+                            "Build things that respect human attention.<br>
+                            Data must tell a precise story.<br>
+                            Function over Friction."
+                        </p>
+                    </div>
+                </div>
+
+            </aside>
         </div>
-    </header>
 
-    <!-- Content Grid (Full-Width Responsive 12-Columns) -->
-    <div class="w-full grid grid-cols-1 lg:grid-cols-12 min-h-screen border-b-2 border-[#1A1A1A]" id="projects-archive">
+        <!-- Footer Section -->
+        <footer id="connect" class="w-full px-6 sm:px-12 lg:px-16 py-12 border-t-3 border-[#18181B] bg-[#18181B] text-[#F4F4F5] relative z-20">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="font-display text-2xl sm:text-3xl font-black text-[#FEF08A] mb-1">Let's Build Something Bold.</p>
+                    <p class="text-xs sm:text-sm text-[#A1A1AA] font-mono">Open for mobile analytics, data telemetry, & full-stack development.</p>
+                </div>
 
-        <!-- Left Column: The Archive (Projects) - 8 Columns -->
-        <main class="lg:col-span-8 border-r-0 lg:border-r-2 border-[#1A1A1A] flex flex-col">
-            <div class="border-b-2 border-[#1A1A1A] p-4 sm:px-8 bg-[#1A1A1A] text-[#F5F5F5] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <h2 class="font-mono font-bold text-lg px-2">THE ARCHIVE (PROJECTS)</h2>
-                <!-- Filter Pills -->
-                <div class="flex flex-wrap gap-1.5 px-2" id="project-filters">
-                    <button onclick="filterProjects('all', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#F5F5F5] text-[#1A1A1A] font-bold border border-[#F5F5F5] cursor-pointer">ALL (6)</button>
-                    <button onclick="filterProjects('system', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">SYSTEMS</button>
-                    <button onclick="filterProjects('android', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">ANDROID</button>
-                    <button onclick="filterProjects('extension', this)" class="filter-pill px-3 py-1 text-[11px] font-mono uppercase bg-[#262626] text-[#F5F5F5] border border-[#555] hover:border-[#F5F5F5] cursor-pointer">EXTENSIONS</button>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="mailto:office.bhumitahir@gmail.com" class="btn-3d px-4 py-2.5 bg-[#BBF7D0] hover:bg-[#86EFAC] text-[#14532D] text-xs rounded-xl">
+                        ✉ office.bhumitahir@gmail.com
+                    </a>
+                    <button onclick="copyEmailToClipboard()" class="btn-3d px-4 py-2.5 bg-[#FEF08A] hover:bg-[#FDE047] text-[#713F12] text-xs rounded-xl">
+                        📋 Copy Email
+                    </button>
+                    <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#BAE6FD] hover:bg-[#7DD3FC] text-[#0C4A6E] text-xs rounded-xl">
+                        GitHub ↗
+                    </a>
+                    <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="btn-3d px-4 py-2.5 bg-[#E9D5FF] hover:bg-[#D8B4FE] text-[#581C87] text-xs rounded-xl">
+                        LinkedIn ↗
+                    </a>
                 </div>
             </div>
 
-            <!-- Project Cards Grid (2-Column Tiled Layout on Wide Screens) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 flex-grow">
-                <!-- Project 01: Minimalist Launcher -->
-                <a href="project_launcher.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="android">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">
-                                    Project 01: Minimalist Launcher</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[IN DEVELOPING STAGE]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">A distraction-free UI designed to reduce screen time and break unconscious scrolling impulses. Focus on what matters, not the noise.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 02: Wisdom Widget -->
-                <a href="project_wisdom.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="android">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 02: Wisdom Widget</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[NOW AVAILABLE ONLY ON PLAY STORE]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">A minimalist home screen widget delivering daily quotes and Sanskrit shloks. Engineered with AlarmManager for near-zero battery overhead.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 03: NEXHR Core Platform -->
-                <a href="project_hrms.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2 bg-[#FAFAFA]" data-category="system">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 03: NEXHR Platform</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 bg-[#1A1A1A] text-[#F5F5F5] shrink-0">FULLSTACK</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[IN DEVELOPING STAGE]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">An AI-powered Workforce Intelligence and HRMS monorepo: GPS-verified attendance clock, shift timeline metrics, RBAC permissions, and automated payroll reporting.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 04: Retail Billing System -->
-                <a href="project_billing.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="system">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 04: Retail Billing System</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">WEB / POS</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">A robust, no-nonsense billing and inventory management system designed for small retail businesses, using keyboard-first navigation for rapid checkout.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 05: TabFlow Chrome Extension -->
-                <a href="project_tabflow.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="extension">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 05: TabFlow Extension</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">CHROME / MV3</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">A local-first, distraction-free Chrome workspace organizer built with Manifest V3, Side Panel API, and duplicate tab detection with zero external telemetry.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Project 06: Bodh Digital Wellbeing -->
-                <a href="project_bodh.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="android">
-                    <article class="p-6 sm:p-8 hover:bg-[#EAEAEA] transition-none cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">Project 06: Bodh App</h3>
-                                <span class="text-xs font-bold border border-[#1A1A1A] px-1 shrink-0">ANDROID / KOTLIN</span>
-                            </div>
-                            <div class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600 inline-block mb-3">[DEVELOPED]</div>
-                            <p class="font-serif leading-relaxed text-sm sm:text-base">A 100% offline mindful wellbeing app built with Jetpack Compose, UsageStatsManager, and deliberate breath-friction gates without requesting INTERNET permission.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- The Stack -->
-                <a href="stack.html" class="block group project-item border-b-2 border-[#1A1A1A] md:border-r-2" data-category="all">
-                    <article class="p-6 sm:p-8 bg-[#1A1A1A] text-[#F5F5F5] hover:bg-[#2A2A2A] transition-colors cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">THE_STACK.JSON</h3>
-                                <span class="text-xs font-bold border border-[#F5F5F5] px-1 shrink-0">HARDWARE</span>
-                            </div>
-                            <p class="font-serif opacity-90 leading-relaxed text-sm sm:text-base">My digital arsenal. Detailed breakdown of the machines, OS setups, and gear that power my daily workflow.</p>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Offline Mode -->
-                <a href="offline.html" class="block group project-item border-b-2 border-[#1A1A1A]" data-category="all">
-                    <article class="p-6 sm:p-8 bg-[#1A1A1A] text-[#F5F5F5] hover:bg-[#2A2A2A] transition-colors cursor-pointer h-full flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-baseline mb-2 gap-2">
-                                <h3 class="font-mono font-bold text-lg sm:text-xl group-hover:underline decoration-2">OFFLINE_MODE</h3>
-                                <span class="text-xs font-bold border border-[#F5F5F5] px-1 shrink-0">PERSONAL</span>
-                            </div>
-                            <p class="font-serif opacity-90 leading-relaxed text-sm sm:text-base">Beyond the code. Athletics, reading, and the "Fast Learner" relentless discipline mindset inspired by Virat Kohli.</p>
-                        </div>
-                    </article>
-                </a>
+            <div class="max-w-7xl mx-auto mt-10 pt-5 border-t border-[#3F3F46] flex flex-col sm:flex-row justify-between items-center text-xs font-mono text-[#A1A1AA] gap-2">
+                <div>© 2024 Bhumit Ahir • Mobile App Data Analyst Intern</div>
+                <div id="last-synced">Last Synced: Loading...</div>
             </div>
-        </main>
+        </footer>
 
-        <!-- Right Column: Skills & System Specs - 4 Columns -->
-        <aside class="lg:col-span-4 flex flex-col h-full border-t-2 lg:border-t-0 border-[#1A1A1A] bg-[#1A1A1A] text-[#F5F5F5]">
-
-            <!-- Experience & Skills -->
-            <div class="flex-grow bg-[#1A1A1A] text-[#F5F5F5] font-mono text-xs overflow-hidden">
-                <div class="border-b-2 border-[#F5F5F5] p-4 text-[#F5F5F5]">
-                    <h2 class="font-bold text-lg px-2">RUNTIME_ENVIRONMENT.LOG</h2>
-                </div>
-                <!-- ASCII Dashboard -->
-                <div class="p-6 sm:p-8 space-y-6">
-
-                    <!-- Section 0: Current Internship Role -->
-                    <div>
-                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CURRENT_ROLE]</div>
-                        <div class="space-y-1.5">
-                            <div class="flex justify-between">
-                                <span class="opacity-70">ROLE</span>
-                                <span class="text-green-400 font-bold">DATA_ANALYST</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">ORG</span>
-                                <span class="text-yellow-400 font-bold">Logicgo Infotech</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">STATUS</span>
-                                <span class="text-green-500 font-bold">INTERN_ACTIVE</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">FOCUS</span>
-                                <span class="text-blue-400">Mobile Telemetry</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 1: System Status -->
-                    <div>
-                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[SYSTEM_STATUS]</div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between">
-                                <span class="opacity-70">PILOT_STATE</span>
-                                <span class="text-green-500">ONLINE</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">EDUCATION</span>
-                                <span class="text-green-500">B.TECH CSE (DS)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">AI_ASSIST</span>
-                                <span class="text-blue-400">ACTIVE_v2.0</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 2: Core Variables -->
-                    <div>
-                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CORE_VARIABLES]</div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between">
-                                <span class="opacity-70">ADAPTABILITY</span>
-                                <span class="text-yellow-500">[MAXIMUM]</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">LEARNING_RATE</span>
-                                <span>0.99 (EXTREME)</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="opacity-70">CORE_STACK</span>
-                                <span class="text-purple-400">Python • Node • Kotlin</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 3: Capabilities -->
-                    <div>
-                        <div class="opacity-50 mb-2 border-b border-[#333] pb-1">[CAPABILITIES_MATRIX]</div>
-
-                        <div class="mb-2">
-                            <div class="flex justify-between mb-1">
-                                <span>DATA_ANALYTICS</span>
-                            </div>
-                            <div class="tracking-tighter text-green-500">[||||||||||]</div>
-                        </div>
-
-                        <div class="mb-2">
-                            <div class="flex justify-between mb-1">
-                                <span>RAPID_PROTOTYPE</span>
-                            </div>
-                            <div class="tracking-tighter text-blue-400">[||||||||||]</div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span>SYSTEM_DESIGN</span>
-                            </div>
-                            <div class="tracking-tighter text-yellow-500 opacity-80">[||||||||..]</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Core Philosophy Card (Clean without console prompt) -->
-            <div
-                class="border-t-2 border-[#333] p-6 sm:p-8 font-mono text-xs bg-[#1A1A1A] text-[#F5F5F5] flex flex-col justify-end">
-                <div class="opacity-50 text-[10px] tracking-widest uppercase mb-2">[CORE_PHILOSOPHY]</div>
-                <div class="italic font-serif text-sm leading-relaxed text-[#F5F5F5] border-l-2 border-[#22C55E] pl-3 py-1">
-                    "Build things that respect human attention.<br>
-                    Data must tell a precise story.<br>
-                    Function over Friction."
-                </div>
-            </div>
-
-        </aside>
     </div>
 
-    <!-- Footer (Full Width) -->
-    <footer id="connect" class="w-full px-6 sm:px-12 lg:px-16 py-12 sm:py-16 text-center bg-[#1A1A1A] text-[#F5F5F5]">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left">
-                <p class="font-serif text-2xl font-bold mb-1">Let's Connect.</p>
-                <p class="text-sm opacity-80 font-mono">Open for mobile analytics, data science, & full-stack development.</p>
-            </div>
+    <!-- Retro Toast Feedback -->
+    <div id="copy-toast">COPIED TO CLIPBOARD: office.bhumitahir@gmail.com</div>
 
-            <div class="flex flex-wrap gap-3">
-                <a href="mailto:office.bhumitahir@gmail.com"
-                    class="px-5 py-3 border-2 border-[#22C55E] text-[#22C55E] font-bold hover:bg-[#22C55E] hover:text-[#000000] transition-none uppercase text-xs flash-active font-mono">✉ office.bhumitahir@gmail.com</a>
-                <button onclick="copyEmailToClipboard()"
-                    class="px-4 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono cursor-pointer">📋 Copy Email</button>
-                <a href="https://github.com/officebhumitahir-source" target="_blank" rel="noopener noreferrer"
-                    class="px-5 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono">GitHub</a>
-                <a href="https://www.linkedin.com/in/bhumit-ahir-300362321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer"
-                    class="px-5 py-3 border-2 border-[#F5F5F5] font-bold hover:bg-[#F5F5F5] hover:text-[#1A1A1A] transition-none uppercase text-xs flash-active font-mono">LinkedIn</a>
-            </div>
-        </div>
+    <!-- Interactive Scripts: 3D Tilt Engine, Ambient Spheres Parallax, Clock, Sound -->
+    <script>
+        // --- CLOCK & DATE ---
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            const clockEl = document.getElementById('clock');
+            if (clockEl) clockEl.textContent = `${hours}:${minutes} ${ampm}`;
 
-        <div
-            class="mt-12 pt-6 border-t border-[#F5F5F5] border-opacity-20 flex flex-col sm:flex-row justify-between items-center text-xs font-mono uppercase tracking-widest gap-2">
-            <div>
-                © 2024 Bhumit Ahir • Logicgo Infotech Intern
-            </div>
-            <div id="last-synced">
-                Last Synced: Loading...
-            </div>
-        </div>
-    </footer>
-</div> <!-- Close #site-content -->
+            const dateString = now.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' });
+            const lastSynced = document.getElementById('last-synced');
+            if (lastSynced) lastSynced.textContent = "Last Synced: " + dateString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-<!-- Retro Toast Container -->
-<div id="copy-toast">COPIED TO CLIPBOARD: office.bhumitahir@gmail.com</div>
+        // --- WEB AUDIO API MECHANICAL CLICK ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let isAudioMuted = false;
 
-<!-- Scripts -->
-<script>
-    // Clock Script
-    function updateClock() {
-        const now = new Date();
-        let hours = now.getHours();
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        document.getElementById('clock').textContent = `${hours}:${minutes} ${ampm}`;
-
-        const dateString = now.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' });
-        const lastSynced = document.getElementById('last-synced');
-        if (lastSynced) lastSynced.textContent = "Last Synced: " + dateString;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Screen Flash Interaction
-    const flashOverlay = document.getElementById('flash-overlay');
-
-    function triggerFlash() {
-        // Reset animation
-        flashOverlay.classList.remove('flash-anim');
-        void flashOverlay.offsetWidth; // Trigger reflow
-        flashOverlay.classList.add('flash-anim');
-    }
-
-    // Attach flash to all links and interactive elements
-    document.querySelectorAll('a, button, article, label').forEach(el => {
-        el.addEventListener('click', (e) => {
-            triggerFlash();
-        });
-    });
-
-    // --- TERMINAL & SOUND SYSTEM ---
-
-    // Web Audio API Context
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let isAudioMuted = false;
-
-    function toggleAudio() {
-        isAudioMuted = !isAudioMuted;
-        const ind = document.getElementById('sound-indicator');
-        const txt = document.getElementById('sound-text');
-        if (isAudioMuted) {
-            if (ind) ind.textContent = "🔇";
-            if (txt) txt.textContent = "AUDIO: OFF";
-            showToast("AUDIO MUTED");
-        } else {
-            if (ind) ind.textContent = "🔊";
-            if (txt) txt.textContent = "AUDIO: ON";
+        function playSound(type) {
+            if (isAudioMuted) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            playSound('click');
-            showToast("AUDIO ACTIVE");
-        }
-    }
 
-    function toggleTheme() {
-        document.body.classList.toggle('hack-mode');
-        const themeTxt = document.getElementById('theme-text');
-        if (document.body.classList.contains('hack-mode')) {
-            if (themeTxt) themeTxt.textContent = "THEME: MATRIX";
-            showToast("THEME: MATRIX HACK MODE");
-            printToTerminal("SYSTEM COMPILED. MATRIX / CYBER THEME ACTIVE.");
-        } else {
-            if (themeTxt) themeTxt.textContent = "THEME: PAPER";
-            showToast("THEME: KINDLE PAPER");
-            printToTerminal("SYSTEM RESTORED. KINDLE PAPER THEME ACTIVE.");
-        }
-    }
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
 
-    function playSound(type) {
-        if (isAudioMuted) return;
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        const now = audioCtx.currentTime;
-
-        if (type === 'click') {
-            // Mechanical Click (Square wave + noise-like drop)
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(300, now);
-            osc.frequency.exponentialRampToValueAtTime(100, now + 0.08);
-            gainNode.gain.setValueAtTime(0.1, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-            osc.start(now);
-            osc.stop(now + 0.08);
-        } else if (type === 'typeKey') {
-            // Typewriter Key (High pitch, very short)
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(600, now);
-            osc.frequency.exponentialRampToValueAtTime(300, now + 0.03);
-            gainNode.gain.setValueAtTime(0.05, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
-            osc.start(now);
-            osc.stop(now + 0.03);
-        }
-    }
-
-    // Terminal Logic
-    const defaultPrompt = "visitor@portfolio:~$";
-
-    // Global Click Listener (Sound + Nav Delay)
-    document.addEventListener('click', (e) => {
-        const interactive = e.target.closest('a, button, article, input, label');
-        if (interactive) {
-            playSound('click');
-
-            const link = e.target.closest('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                if (href && href !== '#' && !href.startsWith('mailto:') && !link.target && !href.startsWith('#')) {
-                    e.preventDefault();
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 120);
-                }
+            if (type === 'click') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(320, now);
+                osc.frequency.exponentialRampToValueAtTime(110, now + 0.07);
+                gainNode.gain.setValueAtTime(0.08, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+                osc.start(now);
+                osc.stop(now + 0.07);
             }
         }
-    });
 
-    // Bottom console removed per user request
-    function printToTerminal(content, isCommand = false) {
-        console.log('[LOG]:', content);
-    }
+        // Global Click Listener for Tactile Audio
+        document.addEventListener('click', (e) => {
+            const interactive = e.target.closest('a, button, .tilt-card');
+            if (interactive) playSound('click');
+        });
 
-    // Footer Console hidden as requested - functions preserved for programmatic/console interaction
-    const termInput = document.getElementById('terminal-input');
-    const helperEl = document.getElementById('cmd-helper');
+        // --- INTERACTIVE 3D TILT ENGINE ---
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -12;
+                const rotateY = ((x - centerX) / centerX) * 12;
 
-    function showHelper() { if (helperEl) helperEl.classList.add('visible'); }
-    function hideHelper() { if (helperEl) helperEl.classList.remove('visible'); }
+                card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
+                card.style.setProperty('--mouse-x', `${((x / rect.width) * 100).toFixed(1)}%`);
+                card.style.setProperty('--mouse-y', `${((y / rect.height) * 100).toFixed(1)}%`);
+            });
 
-    if (termInput) {
-        termInput.addEventListener('focus', showHelper);
-        termInput.addEventListener('blur', () => setTimeout(hideHelper, 250));
-        termInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = termInput.value.trim().toLowerCase();
-                if (cmd) processCommand(cmd);
-                termInput.value = '';
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // --- AMBIENT SPHERES MOUSE PARALLAX ---
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+        let mouseTimestamp = Date.now();
+        const velEl = document.getElementById('mon-vel');
+        const scrEl = document.getElementById('mon-scr');
+        const tmeEl = document.getElementById('mon-tme');
+
+        let seconds = 0;
+        setInterval(() => {
+            seconds++;
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            if (tmeEl) tmeEl.textContent = `TME: ${m}:${s}`;
+        }, 1000);
+
+        window.addEventListener('scroll', () => {
+            const percent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) || 0;
+            if (scrEl) scrEl.textContent = `SCR: ${percent}%`;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            const dt = now - mouseTimestamp;
+            if (dt > 80) {
+                const dx = e.clientX - lastMouseX;
+                const dy = e.clientY - lastMouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const speed = Math.round((dist / dt) * 1000);
+                if (velEl) velEl.textContent = `VEL: ${speed}px/s`;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                mouseTimestamp = now;
+
+                // Subtle parallax shift on floating spheres
+                const normX = (e.clientX / window.innerWidth - 0.5) * 40;
+                const normY = (e.clientY / window.innerHeight - 0.5) * 40;
+                const sphereLime = document.querySelector('.sphere-lime');
+                const spherePurple = document.querySelector('.sphere-purple');
+                const sphereCoral = document.querySelector('.sphere-coral');
+                if (sphereLime) sphereLime.style.transform = `translate(${normX * 0.8}px, ${normY * 0.8}px)`;
+                if (spherePurple) spherePurple.style.transform = `translate(${-normX * 1.1}px, ${-normY * 1.1}px)`;
+                if (sphereCoral) sphereCoral.style.transform = `translate(${normX * 0.5}px, ${-normY * 0.5}px)`;
             }
         });
-    }
 
-    function executeChip(cmd) {
-        if (termInput) termInput.value = cmd;
-        processCommand(cmd);
-        if (termInput) termInput.value = '';
-    }
-
-    window.runCommand = processCommand;
-
-    // Core Command Processor (Rich Console, No Alerts)
-    function processCommand(cmd) {
-        playSound('typeKey');
-        printToTerminal(cmd, true);
-
-        switch (cmd) {
-            case 'help':
-                printToTerminal(`
-<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
-    <div class="text-green-400 font-bold border-b border-green-900 pb-1">AVAILABLE TERMINAL COMMANDS:</div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px]">
-        <div><span class="text-yellow-400 font-bold">ls</span> - List all 6 archive projects</div>
-        <div><span class="text-yellow-400 font-bold">whoami</span> - Identity, role & academic background</div>
-        <div><span class="text-yellow-400 font-bold">exp</span> - Logicgo Infotech internship details</div>
-        <div><span class="text-yellow-400 font-bold">mail</span> - Copy email & open mail client</div>
-        <div><span class="text-yellow-400 font-bold">open [1-6]</span> - Jump to project (e.g. 'open 5' or 'open tabflow')</div>
-        <div><span class="text-yellow-400 font-bold">hack</span> - Toggle Matrix cyber theme</div>
-        <div><span class="text-yellow-400 font-bold">debug</span> - Toggle red inspection outlines</div>
-        <div><span class="text-yellow-400 font-bold">clear</span> - Clear output screen buffer</div>
-    </div>
-</div>`);
-                break;
-
-            case 'whoami':
-                printToTerminal(`
-<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
-    <div class="text-green-400 font-bold">PILOT PROFILE:</div>
-    <div><strong>NAME:</strong>       Bhumit Ahir</div>
-    <div><strong>ROLE:</strong>       <span class="text-yellow-400 font-bold">Mobile App Data Analyst Intern @ Logicgo Infotech</span></div>
-    <div><strong>STUDIES:</strong>    B.Tech CSE (Data Science)</div>
-    <div><strong>PHILOSOPHY:</strong> <span class="text-green-300">"Function over Friction."</span></div>
-    <div><strong>EMAIL:</strong>      <a href="mailto:office.bhumitahir@gmail.com" class="text-blue-400 underline">office.bhumitahir@gmail.com</a></div>
-    <div><strong>STATUS:</strong>     Active & open for collaborations</div>
-</div>`);
-                break;
-
-            case 'exp':
-            case 'internship':
-            case 'experience':
-                printToTerminal(`
-<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
-    <div class="text-green-400 font-bold">// INTERNSHIP LOG:</div>
-    <div><strong>COMPANY:</strong>  <span class="text-yellow-400 font-bold">Logicgo Infotech</span></div>
-    <div><strong>POSITION:</strong> Mobile App Data Analyst Intern</div>
-    <div><strong>FOCUS:</strong>    App telemetry metrics, retention funnels, behavioral analytics & data visualization</div>
-    <div><strong>STACK:</strong>    Python, SQL, Analytics Frameworks, Automation APIs</div>
-</div>`);
-                break;
-
-            case 'ls':
-            case 'projects':
-                printToTerminal(`
-<div class="border border-green-700 bg-black/60 p-2.5 space-y-1">
-    <div class="text-green-400 font-bold">// THE ARCHIVE (06 PROJECTS):</div>
-    <div class="space-y-0.5 text-[11px]">
-        <div>[01] Minimalist Launcher         (Android)   -> <span class="text-green-400">[IN DEVELOPING STAGE]</span></div>
-        <div>[02] Wisdom Widget               (Android)   -> <span class="text-green-400">[ON PLAY STORE]</span></div>
-        <div>[03] NEXHR Platform              (FullStack) -> <span class="text-green-400 font-bold">[IN DEVELOPING STAGE]</span></div>
-        <div>[04] Retail Billing System       (Web/POS)   -> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
-        <div>[05] TabFlow Chrome Extension    (Chrome MV3)-> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
-        <div>[06] Bodh Digital Wellbeing      (Android)   -> <span class="text-green-400 font-bold">[DEVELOPED]</span></div>
-    </div>
-    <div class="text-[10px] opacity-70 mt-1">Tip: Type 'open 5' or 'open tabflow' to jump directly to any page.</div>
-</div>`);
-                break;
-
-            case 'mail':
-            case 'email':
-            case 'contact':
-                copyEmailToClipboard();
-                printToTerminal(`
-<div class="border border-green-700 bg-black/60 p-2.5">
-    <div class="text-green-400 font-bold">DISPATCHING MAIL ACTION...</div>
-    <div>Recipient: <span class="text-yellow-400">office.bhumitahir@gmail.com</span></div>
-    <div>Status: Email address copied to clipboard. Launching default client...</div>
-</div>`);
-                setTimeout(() => { window.location.href = "mailto:office.bhumitahir@gmail.com"; }, 500);
-                break;
-
-            case 'clear':
-            case 'cls':
-                clearTerminalScreen();
-                break;
-
-            case 'open 1':
-            case 'open 01':
-            case 'open launcher':
-                printToTerminal("Navigating to Minimalist Launcher...");
-                setTimeout(() => window.location.href = 'project_launcher.html', 250);
-                break;
-            case 'open 2':
-            case 'open 02':
-            case 'open wisdom':
-                printToTerminal("Navigating to Wisdom Widget...");
-                setTimeout(() => window.location.href = 'project_wisdom.html', 250);
-                break;
-            case 'open 3':
-            case 'open 03':
-            case 'open nexhr':
-            case 'open hrms':
-                printToTerminal("Navigating to NEXHR Platform [IN DEVELOPING STAGE]...");
-                setTimeout(() => window.location.href = 'project_hrms.html', 250);
-                break;
-            case 'open 4':
-            case 'open 04':
-            case 'open billing':
-                printToTerminal("Navigating to Retail Billing System [DEVELOPED]...");
-                setTimeout(() => window.location.href = 'project_billing.html', 250);
-                break;
-            case 'open 5':
-            case 'open 05':
-            case 'open tabflow':
-            case 'open tab':
-                printToTerminal("Navigating to TabFlow Chrome Extension [DEVELOPED]...");
-                setTimeout(() => window.location.href = 'project_tabflow.html', 250);
-                break;
-            case 'open 6':
-            case 'open 06':
-            case 'open bodh':
-                printToTerminal("Navigating to Bodh Digital Wellbeing [DEVELOPED]...");
-                setTimeout(() => window.location.href = 'project_bodh.html', 250);
-                break;
-
-            case 'hack':
-            case 'matrix':
-                toggleTheme();
-                break;
-
-            case 'debug':
-                document.body.classList.toggle('debug-mode');
-                printToTerminal("DEBUG MODE TOGGLED (Red DOM inspection outlines active).");
-                break;
-
-            default:
-                if (cmd !== "") {
-                    printToTerminal(`<span class="text-red-400">Command not recognized: "${cmd}". Type 'help' for command directory.</span>`);
-                }
-        }
-    }
-
-    // --- PROJECT FILTERING ---
-    function filterProjects(category, btn) {
-        playSound('click');
-        document.querySelectorAll('.filter-pill').forEach(p => {
-            p.classList.remove('bg-[#F5F5F5]', 'text-[#1A1A1A]', 'font-bold');
-            p.classList.add('bg-[#262626]', 'text-[#F5F5F5]');
-        });
-        if (btn) {
-            btn.classList.add('bg-[#F5F5F5]', 'text-[#1A1A1A]', 'font-bold');
-            btn.classList.remove('bg-[#262626]', 'text-[#F5F5F5]');
-        }
-        document.querySelectorAll('.project-item').forEach(item => {
-            const cat = item.getAttribute('data-category');
-            if (category === 'all' || cat === category || cat === 'all') {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    // --- EMAIL CLIPBOARD & TOAST ---
-    function copyEmailToClipboard() {
-        const email = "office.bhumitahir@gmail.com";
-        navigator.clipboard.writeText(email).then(() => {
-            showToast("COPIED: " + email);
-            printToTerminal(`[CLIPBOARD]: "${email}" copied successfully.`);
-        }).catch(() => {
-            showToast("EMAIL: " + email);
-        });
-    }
-
-    function showToast(msg) {
-        const toast = document.getElementById('copy-toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-    }
-
-    // --- SYSTEM MONITOR LOGIC ---
-    let lastMouseX = 0;
-    let lastMouseY = 0;
-    let mouseTimestamp = Date.now();
-    const velEl = document.getElementById('mon-vel');
-    const scrEl = document.getElementById('mon-scr');
-    const tmeEl = document.getElementById('mon-tme');
-
-    let seconds = 0;
-    setInterval(() => {
-        seconds++;
-        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-        const s = (seconds % 60).toString().padStart(2, '0');
-        if (tmeEl) tmeEl.textContent = `TME: ${m}:${s}`;
-    }, 1000);
-
-    window.addEventListener('scroll', () => {
-        const percent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100) || 0;
-        if (scrEl) scrEl.textContent = `SCR: ${percent}%`;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        const dt = now - mouseTimestamp;
-        if (dt > 100) {
-            const dx = e.clientX - lastMouseX;
-            const dy = e.clientY - lastMouseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const speed = Math.round((dist / dt) * 1000);
-
-            if (velEl) velEl.textContent = `VEL: ${speed}px/s`;
-
-            lastMouseX = e.clientX;
-            lastMouseY = e.clientY;
-            mouseTimestamp = now;
-        }
-    });
-
-    // --- TYPEWRITER EFFECT ---
-    const typeTarget = document.querySelector('.typewriter-target');
-    if (typeTarget) {
-        const fullText = "Full-Stack Developer | Mobile App Data Analyst Intern @ Logicgo Infotech | B.Tech CSE (Data Science)";
-
-        if (sessionStorage.getItem('portfolio_entered') === 'true') {
-            typeTarget.innerText = fullText;
-            typeTarget.classList.remove('typewriter-cursor');
-        } else {
+        // --- TYPEWRITER EFFECT ---
+        const typeTarget = document.querySelector('.typewriter-target');
+        if (typeTarget) {
+            const fullText = "Full-Stack Developer | Mobile App Data Analyst Intern @ Logicgo Infotech | B.Tech CSE (Data Science)";
             typeTarget.innerText = "";
             typeTarget.classList.add('typewriter-cursor');
 
@@ -1043,144 +853,99 @@
                 if (charIndex < fullText.length) {
                     typeTarget.innerText = fullText.substring(0, charIndex + 1);
                     charIndex++;
-                    setTimeout(typeStep, 25 + Math.random() * 30);
+                    setTimeout(typeStep, 20 + Math.random() * 25);
                 } else {
                     typeTarget.classList.remove('typewriter-cursor');
                 }
             }
-            setTimeout(typeStep, 600);
-        }
-    }
-
-    // --- ENTRY SCREEN & INITIALIZATION ---
-    window.addEventListener('load', () => {
-        const entryScreen = document.getElementById('entry-screen');
-        const siteContent = document.getElementById('site-content');
-
-        if (siteContent && !sessionStorage.getItem('portfolio_entered')) {
-            siteContent.style.display = 'none';
-            siteContent.style.opacity = '0';
+            setTimeout(typeStep, 350);
         }
 
-        if (sessionStorage.getItem('portfolio_entered') === 'true') {
-            if (entryScreen) entryScreen.style.display = 'none';
-            if (siteContent) {
-                siteContent.style.display = 'block';
-                siteContent.style.opacity = '1';
-                siteContent.classList.remove('opacity-0');
-
-                const connEl = document.getElementById('status-conn');
-                const battEl = document.getElementById('status-batt');
-                if (connEl) connEl.textContent = "Connected";
-                if (battEl) battEl.textContent = "100%";
+        // --- PROJECT FILTERING ---
+        function filterProjects(category, btn) {
+            playSound('click');
+            document.querySelectorAll('.filter-pill').forEach(p => {
+                p.classList.remove('bg-[#18181B]', 'text-[#FEF08A]');
+                p.classList.add('bg-[#FFFFFF]', 'text-[#18181B]');
+            });
+            if (btn) {
+                btn.classList.add('bg-[#18181B]', 'text-[#FEF08A]');
+                btn.classList.remove('bg-[#FFFFFF]', 'text-[#18181B]');
             }
-        } else {
-            if (entryScreen) {
-                entryScreen.addEventListener('click', () => {
-                    if (audioCtx.state === 'suspended') audioCtx.resume();
-                    playSound('click');
-
-                    sessionStorage.setItem('portfolio_entered', 'true');
-
-                    entryScreen.style.transition = "opacity 0.5s ease-out";
-                    entryScreen.style.opacity = "0";
-                    setTimeout(() => {
-                        entryScreen.style.display = "none";
-                        if (siteContent) {
-                            siteContent.style.display = "block";
-                            setTimeout(() => {
-                                siteContent.style.opacity = '1';
-                                siteContent.classList.remove('opacity-0');
-                            }, 50);
-                        }
-                        triggerFlash();
-                        startTopBarTypewriter();
-                    }, 400);
-                });
-            }
-        }
-    });
-
-    // --- BOOT SEQUENCE TRANSITION ---
-    const bootOverlay = document.getElementById('boot-overlay');
-    const bootLog = document.getElementById('boot-log');
-
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (!href || href === '#' || href.startsWith('mailto:') || href.startsWith('#') || link.target === '_blank') return;
-
-            e.preventDefault();
-            runBootSequence(href);
-        });
-    });
-
-    function runBootSequence(url) {
-        if (!bootOverlay) {
-            window.location.href = url;
-            return;
+            document.querySelectorAll('.project-item').forEach(item => {
+                const cat = item.getAttribute('data-category');
+                if (category === 'all' || cat === category || cat === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
 
-        bootOverlay.style.display = 'flex';
-        playSound('typeKey');
+        // --- EMAIL CLIPBOARD & TOAST ---
+        function copyEmailToClipboard() {
+            const email = "office.bhumitahir@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                showToast("COPIED: " + email);
+            }).catch(() => {
+                showToast("EMAIL: " + email);
+            });
+        }
 
-        const logs = [
-            "Initializing connection...",
-            "Resolving host...",
-            "Handshaking...",
-            "Loading modules...",
-            "Executing..."
-        ];
+        function showToast(msg) {
+            const toast = document.getElementById('copy-toast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
 
-        let i = 0;
-        bootLog.innerHTML = "";
+        // --- TERMINAL ENGINE (Preserved for console / programmatic interaction) ---
+        function printToTerminal(content) {
+            console.log('[TERMINAL]:', content);
+        }
 
-        const interval = setInterval(() => {
-            if (i < logs.length) {
-                const line = document.createElement('div');
-                line.textContent = `> ${logs[i]}`;
-                bootLog.appendChild(line);
-                playSound('typeKey');
-                i++;
-            } else {
-                clearInterval(interval);
-                window.location.href = url;
-            }
-        }, 70);
-    }
-
-    function startTopBarTypewriter() {
-        const clockEl = document.getElementById('clock');
-        const connEl = document.getElementById('status-conn');
-        const battEl = document.getElementById('status-batt');
-
-        const now = new Date();
-        let hours = now.getHours();
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        const timeStr = `${hours}:${minutes} ${ampm}`;
-
-        if (clockEl) typewriterWithSound(clockEl, timeStr, 100);
-        if (connEl) setTimeout(() => typewriterWithSound(connEl, "Connected", 80), 1000);
-        if (battEl) setTimeout(() => typewriterWithSound(battEl, "100%", 80), 2000);
-    }
-
-    function typewriterWithSound(el, text, speed = 50) {
-        el.textContent = "";
-        let i = 0;
-        function nextChar() {
-            if (i < text.length) {
-                el.textContent += text.charAt(i);
-                playSound('typeKey');
-                i++;
-                setTimeout(nextChar, speed);
+        function processCommand(cmd) {
+            cmd = (cmd || '').trim().toLowerCase();
+            switch (cmd) {
+                case 'whoami':
+                    console.log("Bhumit Ahir • Mobile App Data Analyst Intern @ Logicgo Infotech • B.Tech CSE (DS)");
+                    break;
+                case 'exp':
+                case 'experience':
+                    console.log("Logicgo Infotech: Mobile App Data Analyst Intern (App telemetry, retention, user funnels)");
+                    break;
+                case 'open 1':
+                case 'open launcher':
+                    window.location.href = 'project_launcher.html';
+                    break;
+                case 'open 2':
+                case 'open wisdom':
+                    window.location.href = 'project_wisdom.html';
+                    break;
+                case 'open 3':
+                case 'open nexhr':
+                case 'open hrms':
+                    window.location.href = 'project_hrms.html';
+                    break;
+                case 'open 4':
+                case 'open billing':
+                    window.location.href = 'project_billing.html';
+                    break;
+                case 'open 5':
+                case 'open tabflow':
+                    window.location.href = 'project_tabflow.html';
+                    break;
+                case 'open 6':
+                case 'open bodh':
+                    window.location.href = 'project_bodh.html';
+                    break;
+                default:
+                    console.log("Type whoami, exp, or open 1-6 to navigate.");
             }
         }
-        nextChar();
-    }
-</script>
+        window.runCommand = processCommand;
+    </script>
 </body>
 
 </html>
