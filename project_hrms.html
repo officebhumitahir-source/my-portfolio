@@ -1,154 +1,399 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-auto cursor-default">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRMS Platform | Bhumit Ahir</title>
+    <title>NEXHR AI Platform | Bhumit Ahir</title>
+    <!-- Modern Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+Pro:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700;900&display=swap"
         rel="stylesheet">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { 'kindle-bg': '#F5F5F5', 'kindle-ink': '#1A1A1A' }, fontFamily: { serif: ['"Source Serif Pro"', '"Playfair Display"', 'serif'], mono: ['"JetBrains Mono"', 'monospace'] } } } }
-    </script>
-    <style>
-        body {
-            background-color: #F5F5F5;
-            color: #1A1A1A;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .dither-bg {
-            background-image: url('data:image/svg+xml;utf8,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="1" height="1" fill="%231A1A1A" opacity="0.05"/><rect x="2" y="2" width="1" height="1" fill="%231A1A1A" opacity="0.05"/></svg>');
-        }
-
-        /* Terminal Cursor Blink */
-        .cursor-blink {
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neo-peach': '#FED7AA',
+                        'neo-peach-dark': '#EA580C',
+                        'neo-dark': '#0F172A',
+                        'neo-bg': '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
             }
         }
+    </script>
+    <style>
+        :root {
+            --neo-border: 3px solid #0F172A;
+            --shadow-3d: 6px 6px 0px #0F172A;
+            --shadow-3d-lg: 10px 10px 0px #0F172A;
+            --shadow-3d-active: 2px 2px 0px #0F172A;
+        }
 
-        /* Hacker Text Selection */
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: radial-gradient(#0F172A 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            background-position: 0 0;
+            overflow-x: hidden;
+        }
+
+        .neo-box {
+            border: var(--neo-border);
+            box-shadow: var(--shadow-3d);
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .neo-box-lg {
+            border: var(--neo-border);
+            box-shadow: var(--shadow-3d-lg);
+        }
+
+        .neo-btn {
+            border: var(--neo-border);
+            box-shadow: 4px 4px 0px #0F172A;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .neo-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #0F172A;
+        }
+
+        .neo-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-3d-active);
+        }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .tilt-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.5), transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .tilt-card:hover::before {
+            opacity: 1;
+        }
+
+        #ambient-sphere-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(55px);
+            opacity: 0.45;
+            animation: floatOrb 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-40px) rotate(180deg) scale(1.08); }
+            100% { transform: translateY(30px) rotate(360deg) scale(0.95); }
+        }
+
         ::selection {
-            background: #22C55E;
-            color: #000000;
+            background: #FED7AA;
+            color: #0F172A;
         }
     </style>
 </head>
 
-<body class="min-h-screen font-serif relative w-full bg-[#F5F5F5] text-[#1A1A1A] m-0 p-0 overflow-x-hidden">
+<body class="min-h-screen relative w-full m-0 p-0">
 
-    <nav class="border-b-2 border-[#1A1A1A] px-6 sm:px-12 lg:px-16 py-4 flex justify-between items-center bg-[#F5F5F5] sticky top-0 z-50">
-        <a href="index.html" class="font-mono font-bold text-sm hover:underline">
-            &lt; RETURN</a>
-        <div class="flex items-center gap-2">
-            <span class="text-xs font-mono font-bold uppercase tracking-wider text-green-700 bg-green-100 px-2 py-0.5 border border-green-600">[IN DEVELOPING STAGE]</span>
-            <span class="font-mono text-xs font-bold uppercase tracking-widest hidden sm:inline">Project 03 // NEXHR Platform</span>
+    <div id="ambient-sphere-layer">
+        <div class="floating-sphere w-[28rem] h-[28rem] -top-20 -left-20 bg-gradient-to-br from-orange-300 to-amber-400" style="animation-duration: 23s;"></div>
+        <div class="floating-sphere w-96 h-96 top-1/2 -right-24 bg-gradient-to-br from-rose-300 to-red-200" style="animation-duration: 20s; animation-delay: -5s;"></div>
+        <div class="floating-sphere w-80 h-80 bottom-10 left-1/3 bg-gradient-to-br from-yellow-200 to-pink-200" style="animation-duration: 18s; animation-delay: -8s;"></div>
+    </div>
+
+    <!-- Sticky 3D Nav Bar -->
+    <nav class="border-b-[3px] border-[#0F172A] px-6 sm:px-12 lg:px-16 py-4 flex justify-between items-center bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <a href="index.html" class="neo-btn bg-[#F8FAFC] text-[#0F172A] px-4 py-2 text-xs uppercase tracking-wider rounded-xl">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            RETURN TO PORTFOLIO
+        </a>
+        <div class="flex items-center gap-3">
+            <span class="text-xs font-mono font-black uppercase tracking-wider text-orange-950 bg-orange-200 px-3 py-1 border-[2.5px] border-[#0F172A] rounded-lg shadow-[2px_2px_0px_#0F172A]">
+                [IN DEVELOPING STAGE]
+            </span>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest hidden md:inline text-slate-500">
+                PROJECT 03 // FULL-STACK AI MONOREPO
+            </span>
         </div>
     </nav>
 
-    <main>
-        <header class="w-full px-6 sm:px-12 lg:px-16 py-10 sm:py-14 border-b-2 border-[#1A1A1A] text-center">
-            <h1 class="text-3xl sm:text-5xl font-black font-serif mb-2">NEXHR: AI Workforce Intelligence Platform<span
-                    class="text-green-600 animate-pulse">_</span></h1>
-            <div class="font-mono text-xs uppercase tracking-widest opacity-60">Full-Stack Monorepo • React 18 • Node.js • Prisma ORM • AI Copilot</div>
+    <!-- Main Content -->
+    <main class="w-full relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-10 space-y-10">
+
+        <!-- Hero Header Card -->
+        <header class="neo-box bg-[#FED7AA] rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+            <div class="absolute -right-8 -top-8 w-32 h-32 bg-white/30 rounded-full blur-xl pointer-events-none"></div>
+            <div class="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border-[2.5px] border-[#0F172A] shadow-[3px_3px_0px_#0F172A] mb-4 text-xs font-mono font-black uppercase">
+                <span class="w-2.5 h-2.5 rounded-full bg-orange-600 animate-ping"></span>
+                <span>Enterprise Workforce Intelligence</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-[#0F172A] mb-4">
+                NEXHR Platform<span class="text-orange-700 animate-pulse">_</span>
+            </h1>
+            <div class="text-xs sm:text-sm font-mono font-bold uppercase text-slate-800 mb-4">
+                AI Workforce Intelligence &bull; Full-Stack Monorepo
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 font-mono text-xs font-bold uppercase text-[#0F172A]">
+                <span class="bg-white/80 px-3 py-1 rounded-lg border-2 border-[#0F172A]">React 18 / Vite</span>
+                <span class="bg-white/80 px-3 py-1 rounded-lg border-2 border-[#0F172A]">Node.js &bull; Express</span>
+                <span class="bg-white/80 px-3 py-1 rounded-lg border-2 border-[#0F172A]">Prisma ORM &bull; PostgreSQL</span>
+                <span class="bg-white/80 px-3 py-1 rounded-lg border-2 border-[#0F172A]">AI Copilot Services</span>
+                <span class="bg-white/80 px-3 py-1 rounded-lg border-2 border-[#0F172A]">GPS Geofencing</span>
+            </div>
         </header>
 
-        <div class="w-full border-b-2 border-[#1A1A1A] bg-[#E5E5E5] relative overflow-hidden group flex justify-center py-8 sm:py-12 px-4">
-            <img src="mockup_hrms.svg" alt="NEXHR AI-Powered HRMS Platform Mockup" class="max-w-4xl w-full h-auto object-contain shadow-lg border-2 border-[#1A1A1A]">
+        <!-- Mockup 3D Tilt Showcase Stage -->
+        <div class="tilt-card neo-box-lg bg-gradient-to-br from-orange-100 via-white to-amber-50 rounded-3xl p-6 sm:p-10 relative overflow-hidden border-[3px] border-[#0F172A]">
+            <div class="flex items-center justify-between pb-6 border-b-[2.5px] border-[#0F172A]/20 mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-rose-400 border border-[#0F172A]"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-amber-400 border border-[#0F172A]"></span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-emerald-400 border border-[#0F172A]"></span>
+                    <span class="font-mono text-xs font-bold text-slate-600 ml-2">ENTERPRISE_DASHBOARD // AI_COPILOT_VIEW</span>
+                </div>
+                <div class="font-mono text-xs bg-white px-2.5 py-1 rounded-md border-2 border-[#0F172A] font-bold">
+                    60 FPS 3D TILT
+                </div>
+            </div>
+            <div class="flex justify-center items-center py-4">
+                <img src="mockup_hrms.svg" alt="NEXHR AI-Powered HRMS Platform Mockup" 
+                     class="max-w-4xl w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(15,23,42,0.15)] rounded-2xl border-[2.5px] border-[#0F172A] bg-white transition-transform duration-300 hover:scale-[1.01]">
+            </div>
         </div>
 
-        <div class="w-full grid grid-cols-1 lg:grid-cols-3 border-b-2 border-[#1A1A1A]">
-            <div class="lg:col-span-2 p-6 sm:p-10 lg:p-14 border-b-2 lg:border-b-0 lg:border-r-2 border-[#1A1A1A] space-y-6">
-                <section>
-                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Overview</h2>
-                    <p class="leading-relaxed">
-                        <strong>NEXHR</strong> is an enterprise-ready, AI-powered Workforce Intelligence and Human Resource Management monorepo platform designed for small-to-medium businesses. Built to replace fragmented HR spreadsheets, it unifies live attendance tracking with GPS geofencing, role-based employee lifecycle directories, automated payroll calculation, and an intelligent AI Copilot that detects workforce attrition risks and payroll discrepancies in real time.
+        <!-- Details Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Overview & Modules (2 Cols) -->
+            <div class="lg:col-span-2 space-y-8">
+                <section class="neo-box bg-white rounded-3xl p-8 sm:p-10">
+                    <div class="inline-block bg-[#FED7AA] px-4 py-1.5 rounded-lg border-[2.5px] border-[#0F172A] shadow-[3px_3px_0px_#0F172A] font-display font-black text-sm uppercase tracking-wider mb-5">
+                        Overview
+                    </div>
+                    <p class="text-base sm:text-lg leading-relaxed text-slate-700 font-medium">
+                        <strong>NEXHR</strong> is an enterprise-ready, AI-powered Workforce Intelligence and Human Resource Management monorepo platform designed for small-to-medium businesses. Built to replace fragmented HR spreadsheets and disconnected legacy portals, it unifies live attendance tracking with GPS geofencing, role-based employee lifecycle directories, automated payroll calculation, and an intelligent AI Copilot that detects workforce attrition risks and payroll discrepancies in real time.
                     </p>
                 </section>
 
-                <section>
-                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Key Modules & Monorepo Architecture</h2>
-                    <ul class="list-disc list-inside space-y-2 font-mono text-sm leading-relaxed">
-                        <li><strong>NEXHR AI Copilot:</strong> Natural language analytics assistant analyzing workforce retention scores, leave spikes, and shift efficiency models.</li>
-                        <li><strong>Attendance & GPS Geofence Engine:</strong> System-verified punch-in / punch-out recording with real-time shift duration countdown and coordinate validation.</li>
-                        <li><strong>Multi-Tenant Role-Based Access Control:</strong> Strict hierarchical permission matrix separating `SUPER_ADMIN`, `COMPANY_ADMIN`, and `EMPLOYEE` portals.</li>
-                        <li><strong>Automated Payroll & Invoicing:</strong> Dynamic salary ledger accounting for tax deductions, overtime rates, and Razorpay subscription billing.</li>
-                        <li><strong>Immutable Audit Trails:</strong> Cryptographically logged administrative events for compliance, security reviews, and employee record integrity.</li>
-                    </ul>
+                <section class="neo-box bg-white rounded-3xl p-8 sm:p-10">
+                    <div class="inline-block bg-amber-200 px-4 py-1.5 rounded-lg border-[2.5px] border-[#0F172A] shadow-[3px_3px_0px_#0F172A] font-display font-black text-sm uppercase tracking-wider mb-5">
+                        Monorepo Architecture &amp; Key Modules
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-5 rounded-2xl border-2 border-[#0F172A] bg-slate-50 shadow-[3px_3px_0px_#0F172A]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                                <h3 class="font-display font-black text-base text-[#0F172A]">NEXHR AI Copilot</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">Natural language analytics assistant analyzing workforce retention scores, leave spikes, and predictive shift efficiency models.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl border-2 border-[#0F172A] bg-slate-50 shadow-[3px_3px_0px_#0F172A]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                <h3 class="font-display font-black text-base text-[#0F172A]">Attendance &amp; GPS Geofence Engine</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">System-verified punch-in / punch-out recording with real-time shift duration countdown and coordinate validation.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl border-2 border-[#0F172A] bg-slate-50 shadow-[3px_3px_0px_#0F172A]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                <h3 class="font-display font-black text-base text-[#0F172A]">Multi-Tenant Role-Based Access Control</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">Strict hierarchical permission matrix separating `SUPER_ADMIN`, `COMPANY_ADMIN`, and `EMPLOYEE` portals.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl border-2 border-[#0F172A] bg-slate-50 shadow-[3px_3px_0px_#0F172A]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                                <h3 class="font-display font-black text-base text-[#0F172A]">Automated Payroll &amp; Invoicing</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">Dynamic salary ledger accounting for tax deductions, overtime rates, and Razorpay subscription billing.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl border-2 border-[#0F172A] bg-slate-50 shadow-[3px_3px_0px_#0F172A]">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                                <h3 class="font-display font-black text-base text-[#0F172A]">Immutable Audit Trails</h3>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">Cryptographically logged administrative events for compliance, security reviews, and employee record integrity.</p>
+                        </div>
+                    </div>
                 </section>
 
-                <section>
-                    <h2 class="font-mono font-bold text-lg mb-2 uppercase">Current Status Note</h2>
-                    <p class="text-sm font-mono bg-[#EAEAEA] p-4 border-l-4 border-green-600 leading-relaxed">
-                        <strong>DEVELOPMENT PHASE:</strong> Core backend APIs, Prisma PostgreSQL schema, and authentication layers are operational. The React frontend dashboard and AI telemetry integration are undergoing final integration testing.
+                <div class="neo-box bg-emerald-100 rounded-3xl p-6 text-[#0F172A] border-[2.5px] border-[#0F172A]">
+                    <div class="font-mono text-xs font-black uppercase tracking-wider text-emerald-900 mb-2">[CURRENT_DEVELOPMENT_PHASE]</div>
+                    <p class="text-sm font-mono text-emerald-950 font-bold leading-relaxed">
+                        Core backend APIs, Prisma PostgreSQL schema, and authentication layers are operational. The React frontend dashboard and AI telemetry integration are undergoing final integration testing.
                     </p>
-                </section>
+                </div>
             </div>
 
-            <div class="p-8 bg-[#1A1A1A] text-[#F5F5F5] flex flex-col justify-between min-h-[300px]">
-                <div>
-                    <h2 class="font-mono font-bold text-lg mb-4 border-b border-[#F5F5F5] pb-2 text-center md:text-left">
-                        TECH STACK</h2>
-                    <div class="space-y-2 font-mono text-sm">
-                        <div class="flex justify-between scram-container"><span>Frontend</span> <span class="text-green-400 font-bold">React 18 / Vite</span></div>
-                        <div class="flex justify-between scram-container"><span>Monorepo</span> <span>npm workspaces</span></div>
-                        <div class="flex justify-between scram-container"><span>Backend</span> <span class="text-yellow-400 font-bold">Node.js / Express</span></div>
-                        <div class="flex justify-between scram-container"><span>Database</span> <span>PostgreSQL / Prisma</span></div>
-                        <div class="flex justify-between scram-container"><span>AI Engine</span> <span class="text-blue-400">Python ML Services</span></div>
-                        <div class="flex justify-between scram-container"><span>Security</span> <span>JWT + RBAC + GPS</span></div>
-                        <div class="flex justify-between scram-container"><span>Billing</span> <span>Razorpay API</span></div>
+            <!-- Tech Stack Card (1 Col) -->
+            <div class="space-y-8">
+                <div class="neo-box bg-[#0F172A] text-white rounded-3xl p-8 relative overflow-hidden">
+                    <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-6">
+                        <h2 class="font-display font-black text-xl text-orange-400">TECH STACK</h2>
+                        <span class="text-xs font-mono bg-orange-950 text-orange-300 border border-orange-500 px-2 py-0.5 rounded">MONOREPO</span>
+                    </div>
+
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">Frontend</span>
+                            <span class="text-orange-300 font-bold">React 18 / Vite</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">Monorepo</span>
+                            <span class="text-slate-200">npm workspaces</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">Backend</span>
+                            <span class="text-yellow-400 font-bold">Node.js / Express</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">Database</span>
+                            <span class="text-cyan-400 font-bold">PostgreSQL / Prisma</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">AI Services</span>
+                            <span class="text-blue-400">Python ML Services</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                            <span class="text-slate-400">Security</span>
+                            <span class="text-emerald-400 font-bold">JWT + RBAC + GPS</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Billing Engine</span>
+                            <span class="text-purple-300 font-bold">Razorpay API</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-800">
+                        <div class="text-xs font-mono text-slate-400 mb-1">LEAD ARCHITECT:</div>
+                        <div class="font-display font-bold text-base text-white">Bhumit Ahir</div>
+                        <div class="text-xs font-mono text-orange-400 font-bold mt-1">STATE: IN DEVELOPING STAGE</div>
                     </div>
                 </div>
-                <div class="mt-8 border-t border-[#333] pt-4 font-mono text-xs opacity-75">
-                    <div>ENGINEER: Bhumit Ahir</div>
-                    <div class="text-green-400 font-bold">STATE: IN DEVELOPING STAGE</div>
+
+                <div class="neo-box bg-amber-200 rounded-3xl p-6 text-[#0F172A]">
+                    <div class="font-display font-black text-sm uppercase tracking-wider mb-2">Architectural Standard</div>
+                    <p class="font-medium text-sm leading-relaxed text-amber-950">
+                        "Structure powers scale. Simplicity maintains it. Enterprise software should be as snappy, intuitive, and responsive as modern consumer apps."
+                    </p>
                 </div>
             </div>
+
         </div>
+
     </main>
 
-    <footer class="w-full p-8 sm:p-12 text-center bg-[#F5F5F5]">
-        <p class="font-serif italic text-lg mb-4">"Structure powers scale. Simplicity maintains it."</p>
-        <a href="index.html"
-            class="inline-block px-8 py-3 bg-[#1A1A1A] text-[#F5F5F5] font-bold font-mono text-sm hover:invert transition-none">BACK
-            TO PORTFOLIO</a>
+    <!-- 3D Footer -->
+    <footer class="w-full mt-20 border-t-[3px] border-[#0F172A] bg-white py-12 px-6 text-center relative z-10">
+        <div class="max-w-2xl mx-auto space-y-6">
+            <p class="font-display font-bold text-xl text-[#0F172A]">
+                Explore more systems &amp; software engineering work
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="index.html" class="neo-btn bg-[#FED7AA] text-[#0F172A] px-8 py-3.5 text-sm uppercase tracking-wider rounded-2xl">
+                    ← BACK TO PORTFOLIO
+                </a>
+                <a href="mailto:office.bhumitahir@gmail.com" class="neo-btn bg-white text-[#0F172A] px-8 py-3.5 text-sm uppercase tracking-wider rounded-2xl">
+                    GET IN TOUCH
+                </a>
+            </div>
+            <div class="font-mono text-xs text-slate-500 pt-4">
+                BHUMIT AHIR // PORTFOLIO 2026 // NEO-BRUTALIST 3D POP
+            </div>
+        </div>
     </footer>
 
+    <!-- Interactive Scripts -->
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
             const now = audioCtx.currentTime;
 
             if (type === 'click') {
                 osc.type = 'square';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.exponentialRampToValueAtTime(100, now + 0.08);
-                gainNode.gain.setValueAtTime(0.1, now);
-                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                osc.frequency.setValueAtTime(320, now);
+                osc.frequency.exponentialRampToValueAtTime(120, now + 0.07);
+                gain.gain.setValueAtTime(0.09, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
                 osc.start(now);
-                osc.stop(now + 0.08);
+                osc.stop(now + 0.07);
             }
         }
 
-        // Global Click Audio
         document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('click', () => {
-                playSound('click');
+            el.addEventListener('click', () => playSound('click'));
+        });
+
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -6;
+                const rotateY = ((x - centerX) / centerX) * 6;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
             });
         });
     </script>
